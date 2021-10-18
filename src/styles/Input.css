@@ -1,0 +1,18 @@
+.input-component {
+    width: 635px;
+    height: 51px;
+    border: 1px solid #777777;
+    border-radius: 3px;
+    padding-left: 15px;
+}
+
+.input-component:focus {
+    border: 1px solid #777777;
+}
+
+.input-component::placeholder {
+    font-size: 18px;
+    color: #000000;
+    opacity: .3;
+    weight: 400;
+}
