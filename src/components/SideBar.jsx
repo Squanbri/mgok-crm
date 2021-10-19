@@ -1,23 +1,28 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import "../styles/sidiebar.css";
 import {ReactComponent as LogoSvg} from "../assets/icons/logo.svg";
-import {Link} from "react-router-dom";
+import {NavLink} from "react-router-dom";
 import Button from "./button";
+import {Context} from "../index";
 
 const SideBar = () => {
+    const {auth} = useContext(Context)
+
     return (
         <nav>
             <LogoSvg className="nav-logo"/>
 
             <ul className="nav-links">
                 <li className="nav-links__item">
-                    <Link to="/" className="nav-link">Специальность</Link>
+                    <NavLink to="/" className="nav-link">
+                        Специальность
+                    </NavLink>
                 </li>
                 <li className="nav-links__item">
-                    <Link to="/applications" className="nav-link">Заявки</Link>
+                    <NavLink  to="/applications" className="nav-link">Заявки</NavLink>
                 </li>
                 <li className="nav-links__item">
-                    <Link to="/subjects" className="nav-link">Предметы</Link>
+                    <NavLink  to="/subjects" className="nav-link">Предметы</NavLink>
                 </li>
             </ul>
 
@@ -27,6 +32,7 @@ const SideBar = () => {
                     display: 'flex',
                     margin: 'auto'
                 }}
+                onClick={() =>auth.logout()}
             >
                 Выйти
             </Button>

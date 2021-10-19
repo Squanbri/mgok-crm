@@ -1,10 +1,13 @@
-import React, {useState} from 'react';
-import {Button, TextField} from "@mui/material";
-import {auth} from "../../store/auth";
+import React, {useContext, useState} from 'react';
+import {Alert, Button, TextField} from "@mui/material";
 
-const Auth = () => {
+import {Context} from "../../index";
+import {observer} from "mobx-react-lite";
+
+const Auth = observer(() => {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
+    const {auth} = useContext(Context)
 
     return (
         <form className="form-auth">
@@ -34,8 +37,18 @@ const Auth = () => {
             >
                 Войти
             </Button>
+
+            {auth.errors.map((error, index) =>
+                <Alert
+                    severity="error"
+                    key={index}
+                    sx={{ marginTop: '10px' }}
+                >
+                    {error}
+                </Alert>
+            )}
         </form>
     );
-};
+});
 
 export default Auth;

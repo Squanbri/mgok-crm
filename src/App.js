@@ -7,25 +7,42 @@ import {
 } from "react-router-dom";
 import Speciality from "./pages/Speciality/Speciality";
 import SideBar from "./components/SideBar";
+import {useContext, useEffect} from "react";
+import {Context} from "./index";
+import {observer} from "mobx-react-lite";
 
-function App() {
+const App = observer(() => {
+
+    const {auth} = useContext(Context)
+
+    useEffect(() => {
+        auth.check()
+    }, [])
+
     return (
         <Router>
             <main className="App">
                 <Switch>
-                    <Route path="/auth">
+
+                    {auth.isAuth ? (
+                        <>
+                            <SideBar/>
+                            <Route exact path="/">
+                                <Speciality/>
+                            </Route>
+                            <Route path="/applications">
+                                123
+                            </Route>
+                        </>
+                    ): (
                         <Auth/>
-                    </Route>
-                    <div className="page">
-                        <SideBar/>
-                        <Route path="/">
-                            <Speciality/>
-                        </Route>
-                    </div>
+                    )}
+
+
                 </Switch>
             </main>
         </Router>
   );
-}
+})
 
 export default App;

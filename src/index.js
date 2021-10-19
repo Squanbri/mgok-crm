@@ -1,9 +1,14 @@
-import React from 'react';
+import React, {createContext} from 'react';
 import ReactDOM from 'react-dom';
 import './styles/index.css';
 import App from './App';
+import Auth from "./store/auth";
+
+export const Context = createContext(null)
 
 ReactDOM.render(
-   <App />,
+    <Context.Provider value={{auth: new Auth()}}>
+        <App/>
+    </Context.Provider>,
   document.getElementById('root')
 );
