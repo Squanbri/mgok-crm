@@ -5,7 +5,7 @@ import {
     Switch,
     Route
 } from "react-router-dom";
-import Speciality from "./pages/Speciality/Speciality";
+import Specialities from "./pages/Specialities/Specialities";
 import SideBar from "./components/SideBar";
 import {useContext, useEffect} from "react";
 import {Context} from "./index";
@@ -28,7 +28,7 @@ const App = observer(() => {
                         <>
                             <SideBar/>
                             <Route exact path="/">
-                                <Speciality/>
+                                <Specialities/>
                             </Route>
                             <Route path="/applications">
                                 123

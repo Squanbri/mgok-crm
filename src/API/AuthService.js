@@ -9,7 +9,8 @@ export default class AuthService {
         return response.data
     }
 
-    static async logout(token) {
+    static async logout() {
+        const token = localStorage.getItem('token')
         const response = await axios.delete('http://jn.mgok.moscow/public/api/auth/logout', {
             headers: {
                 Authorization: `Bearer ${token}`

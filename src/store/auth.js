@@ -1,4 +1,4 @@
-import {makeAutoObservable, observable, values} from "mobx";
+import {makeAutoObservable} from "mobx";
 import AuthService from "../API/AuthService";
 
 class Auth {
@@ -45,8 +45,7 @@ class Auth {
 
     async logout() {
         try {
-            const token = localStorage.getItem('token')
-            const res = await AuthService.logout(token)
+            const res = await AuthService.logout()
         } catch (e) {
             console.log(e)
         } finally {
