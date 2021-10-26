@@ -44,7 +44,7 @@ export default class SpecialitiesService {
                 Authorization: `Bearer ${token}`
             }
         }
-        const response = await axios.delete(`http://jn.mgok.moscow/public/api/admin/specialities/${id}/directions`, config)
+        const response = await axios.delete(`http://jn.mgok.moscow/public/api/admin/specialities/${id}`, config)
         return response.data
     }
 }
