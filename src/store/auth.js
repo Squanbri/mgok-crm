@@ -37,6 +37,7 @@ class Auth {
         } catch (e) {
             const status = e.response.data.status
 
+            this._errors = [];
             if (status?.message === 'The provided credentials are incorrect') {
                 this.setError('Неправильный логин или пароль')
             }

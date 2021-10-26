@@ -1,0 +1,33 @@
+.section-header {
+    padding: 60px;
+    display: flex;
+}
+
+.text-header {
+    color: #000000;
+    font-size: 32px;
+    margin-bottom: 30px;
+}
+
+
+
+
+/* Table */
+.speciality-table {
+    margin-bottom: 60px;
+}
+
+.speciality-table th,
+.speciality-table td{
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 500;
+}
+
+.speciality-table th {
+    font-weight: 700;
+}
+
+tr {
+    cursor: pointer;
+    text-decoration: none;
+}

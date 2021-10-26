@@ -1,53 +1,31 @@
-import React, {useEffect} from 'react';
-import Input from "../../components/input";
-import "../../styles/speciality.css";
+import React, {useContext} from 'react';
+import "../../styles/tables.css";
 import {Paper, Switch, Table, TableBody, TableCell, TableContainer, TableHead, TableRow} from "@mui/material";
-import {specialities} from "../../store/specialities";
 import {observer} from "mobx-react-lite";
+import {Context} from "../../index";
+import TableHeader from "./TableHeader";
+import Speciality from "./Speciality";
+import SpecialitiesHead from "./SpecialitiesHead";
 
 const Specialities = observer(() => {
+    const {store} = useContext(Context)
 
     return (
         <section>
-            <div className="speciality-header">
-                <h3 className="text-header">Специальность</h3>
-                <Input
-                    placeholder="123"
-                />
-            </div>
+            <SpecialitiesHead/>
 
             <div className="speciality-body">
-
                 <TableContainer
                     className="speciality-table"
                     component={Paper}
                     sx={{boxShadow: 0}}
                 >
                     <Table>
-                        <TableHead>
-                            <TableRow sx={{ backgroundColor: '#f7f8fc' }}>
-                                <TableCell align="center" sx={{width: '12%'}}>ID</TableCell>
-                                <TableCell align="left" sx={{width: '67%'}}>Специальность</TableCell>
-                                <TableCell align="right" sx={{width: '8%'}}>ФГОС</TableCell>
-                                <TableCell align="right"  sx={{width: '13%'}}></TableCell>
-                            </TableRow>
-                        </TableHead>
+                        <TableHeader/>
+
                         <TableBody>
-                            {specialities.specialities.map((spec) => (
-                                <TableRow
-                                    key={spec.id}
-                                    sx={{ '&:nth-of-type(even)': { backgroundColor: '#f7f8fc' } }}
-                                >
-                                    <TableCell align="center">{spec.id}</TableCell>
-                                    <TableCell align="left">{spec.name}</TableCell>
-                                    <TableCell align="right">{spec.fgos_code}</TableCell>
-                                    <TableCell align="center">
-                                        <Switch
-                                            checked={!!spec.is_active}
-                                            color="secondary"
-                                        />
-                                    </TableCell>
-                                </TableRow>
+                            {store.specialities.map(spec => (
+                                <Speciality spec={spec}  key={spec.id} />
                             ))}
                         </TableBody>
                     </Table>
