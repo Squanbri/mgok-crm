@@ -31,6 +31,15 @@ class Store {
         return values(this._directions)
     }
 
+    removeSpeciality(id) {
+        this._specialities.forEach((speciality, index) => {
+            if (speciality.id === parseInt(id)) {
+                SpecialitiesAPI.deleteSpeciality(speciality.id)
+                this._specialities.delete(speciality.id)
+            }
+        })
+    }
+
     async fetchSpecialities() {
         const res = await SpecialitiesAPI.fetchSpecialities()
 
@@ -40,6 +49,7 @@ class Store {
     }
 
     async fetchDirections(id) {
+        this._directions.clear()
         const res = await DirectionsAPI.fetchDirections(id)
 
         res.data.forEach(item => {

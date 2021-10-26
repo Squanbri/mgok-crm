@@ -1,5 +1,5 @@
 import React, {useContext} from 'react';
-import "../styles/sidiebar.css";
+import "../styles/Sidiebar.css";
 import {ReactComponent as LogoSvg} from "../assets/icons/logo.svg";
 import {NavLink} from "react-router-dom";
 import Button from "./button";

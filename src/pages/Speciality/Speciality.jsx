@@ -1,6 +1,6 @@
 import React from 'react';
 import Input from "../../components/input";
-import "../../styles/speciality.css";
+import "../../styles/Speciality.css";
 import {Paper, Switch, Table, TableBody, TableCell, TableContainer, TableHead, TableRow} from "@mui/material";
 
 const Speciality = () => {

@@ -3,7 +3,7 @@ import Input from "../../components/input";
 import {Button} from "@mui/material";
 import AddIcon from '@mui/icons-material/Add';
 
-const SpecialitiesHead = () => {
+const SpecialitiesHead = ({setActive}) => {
     return (
         <div className="speciality-header section-header">
             <div>
@@ -14,7 +14,7 @@ const SpecialitiesHead = () => {
             <Button
                 variant="contained"
                 sx={{ width: 120, height: 48, ml: 'auto', gap: .5 }}
-                onClick={() => console.log('add')}
+                onClick={() => setActive(true)}
             >
                 Добавить
                 <AddIcon sx={{ fontSize: 18 }}/>

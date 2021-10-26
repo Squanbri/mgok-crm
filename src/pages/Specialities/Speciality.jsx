@@ -1,12 +1,13 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import {Switch, TableCell, TableRow} from "@mui/material";
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
 import {observer} from "mobx-react-lite";
 import {useHistory} from "react-router-dom";
+import {Context} from "../../index";
 
 const Speciality = observer(({spec}) => {
-
+    const {store} = useContext(Context)
     const history = useHistory()
 
     const linkTo = (e) => {
@@ -21,7 +22,13 @@ const Speciality = observer(({spec}) => {
         spec.setActive(!spec.is_active)
     }
 
-    console.log(spec)
+    const deleteSpeciality = (e) => {
+        e.stopPropagation()
+
+        const tr = e.target.closest('tr')
+        const id = tr.dataset.id
+        store.removeSpeciality(id)
+    }
 
     return (
         <TableRow
@@ -43,7 +50,10 @@ const Speciality = observer(({spec}) => {
                 <EditIcon/>
             </TableCell>
             <TableCell align="center">
-                <DeleteIcon color="error"/>
+                <DeleteIcon
+                    color="error"
+                    onClick={deleteSpeciality}
+                />
             </TableCell>
         </TableRow>
     );
