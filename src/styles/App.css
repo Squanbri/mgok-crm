@@ -18,3 +18,12 @@ section {
   line-height: 39px;
   color: #777777;
 }
+
+.header-add {
+  position: absolute !important;
+  right: 40px;
+}
+
+.header-content {
+  width: 75%;
+}

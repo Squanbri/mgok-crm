@@ -2,8 +2,20 @@ import axios from "axios";
 
 export default class SpecialitiesService {
     static async fetchSpecialities() {
-        const token = localStorage.getItem('token')
         const response = await axios.get(`http://jn.mgok.moscow/public/api/specialities`)
+        return response.data
+    }
+
+    static async fetchSpeciality(id) {
+        const token = localStorage.getItem('token')
+
+        const config = {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        }
+
+        const response = await axios.get(`http://jn.mgok.moscow/public/api/admin/specialities/${id}`, config)
         return response.data
     }
 

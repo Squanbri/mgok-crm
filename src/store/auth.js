@@ -46,7 +46,7 @@ class Auth {
 
     async logout() {
         try {
-            const res = await AuthService.logout()
+            await AuthService.logout()
         } catch (e) {
             console.log(e)
         } finally {

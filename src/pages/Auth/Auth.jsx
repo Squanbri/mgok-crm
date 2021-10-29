@@ -12,7 +12,6 @@ const Auth = observer(() => {
     return (
         <form className="form-auth">
             <TextField
-                id="outlined-password-input"
                 label="Email"
                 type="text"
                 autoComplete="current-password"
@@ -21,7 +20,6 @@ const Auth = observer(() => {
             />
 
             <TextField
-                id="outlined-password-input"
                 label="Password"
                 type="password"
                 autoComplete="current-password"

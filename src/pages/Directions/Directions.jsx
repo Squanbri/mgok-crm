@@ -1,23 +1,28 @@
-import React, {useContext, useEffect} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import {Context} from "../../index";
 import {Paper, Table, TableBody, TableContainer} from "@mui/material";
-import TableHeader from "../Specialities/TableHeader";
-import DirectionsHead from "./DirectionsHead";
 import {useParams} from "react-router-dom";
 import {observer} from "mobx-react-lite";
+
+import DirectionsHead from "./DirectionsHead";
+import TableHeader from "../Specialities/TableHeader";
+import ModalAdd from "./ModalAdd";
 import Direction from "./Direction";
 
 const Directions = observer(() => {
     const {id} = useParams();
     const {store} = useContext(Context)
+    const [active, setActive] = useState(false)
 
     useEffect(() => {
         store.fetchDirections(id)
+        store.fetchSpeciality(id)
     }, [])
 
     return (
         <section>
-            <DirectionsHead/>
+            <DirectionsHead setActive={setActive}/>
+            <ModalAdd active={active} setActive={setActive} />
 
             <div className="speciality-body">
                 <TableContainer

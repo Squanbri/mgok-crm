@@ -1,6 +1,6 @@
 import React, {createContext} from 'react';
 import ReactDOM from 'react-dom';
-import './styles/Index.css';
+import './styles/index.css';
 import App from './App';
 import Auth from "./store/auth";
 import Store from "./store/store";

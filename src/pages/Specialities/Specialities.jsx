@@ -1,6 +1,6 @@
 import React, {useContext, useState} from 'react';
 import "../../styles/tables.css";
-import {Paper, Switch, Table, TableBody, TableCell, TableContainer, TableHead, TableRow} from "@mui/material";
+import {Paper, Table, TableBody, TableContainer} from "@mui/material";
 import {observer} from "mobx-react-lite";
 import {Context} from "../../index";
 import TableHeader from "./TableHeader";

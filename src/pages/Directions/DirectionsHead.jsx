@@ -4,18 +4,18 @@ import {Button} from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
 import "../../styles/tables.css";
 
-const DirectionsHead = () => {
+const DirectionsHead = ({setActive}) => {
     return (
         <div className="direction-header section-header">
-            <div>
-                <h3 className="text-header">Специальность</h3>
-                <Input placeholder="123"/>
+            <div className="header-content">
+                <h3 className="text-header">Токарь на станках с числовым программным управлением</h3>
             </div>
 
             <Button
+                className="header-add"
                 variant="contained"
                 sx={{ width: 120, height: 48, ml: 'auto', gap: .5 }}
-                onClick={() => console.log('add')}
+                onClick={() => setActive(true)}
             >
                 Добавить
                 <AddIcon sx={{ fontSize: 18 }}/>

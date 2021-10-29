@@ -10,24 +10,20 @@ const Speciality = observer(({spec}) => {
     const {store} = useContext(Context)
     const history = useHistory()
 
-    const linkTo = (e) => {
-        const tr = e.target.closest('tr')
-        const id = tr.dataset.id
-        history.push(`/directions/${id}`)
+    const linkTo = () => {
+        history.push(`/directions/${spec.id}`)
     }
 
     const changeSwitch = (e) => {
         e.stopPropagation()
 
-        spec.setActive(!spec.is_active)
+        spec.setActive(!spec.isActive)
     }
 
     const deleteSpeciality = (e) => {
         e.stopPropagation()
 
-        const tr = e.target.closest('tr')
-        const id = tr.dataset.id
-        store.removeSpeciality(id)
+        store.deleteSpeciality(spec.id)
     }
 
     return (
@@ -41,7 +37,7 @@ const Speciality = observer(({spec}) => {
             <TableCell align="right">{spec.code}</TableCell>
             <TableCell align="center">
                 <Switch
-                    checked={!!spec.is_active}
+                    checked={!!spec.isActive}
                     onClick={changeSwitch}
                     color="secondary"
                 />

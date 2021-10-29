@@ -2,15 +2,17 @@ import React, {useContext, useState} from 'react';
 import Modal from "../../components/Modal";
 import {TextField, Button, Typography} from "@mui/material";
 import {Context} from "../../index";
+import {useParams} from "react-router-dom";
 
 const ModalAdd = ({active, setActive}) => {
+    const {id} = useParams();
     const {store} = useContext(Context)
     const [name, setName] = useState('')
     const [code, setCode] = useState('')
 
-    const addSpeciality = () => {
+    const addDirection = () => {
         setActive(false)
-        store.addSpeciality(name, code)
+        store.addDirection(name, code, id)
     }
 
     return (
@@ -20,19 +22,17 @@ const ModalAdd = ({active, setActive}) => {
                 component="span"
                 sx={{mb: '30px'}}
             >
-                Добавить специальность
+                Добавить квалификацию
             </Typography>
 
             <TextField
-                id="outlined-basic"
-                label="Например: Искусство балета"
+                label="Например: Токарь-универсал"
                 variant="outlined"
                 sx={{mb: '15px'}}
                 onChange={(e) => setName(e.target.value)}
             />
             <TextField
-                id="outlined-basic"
-                label="Например: 52.02.01"
+                label="Например: 151902.04"
                 variant="outlined"
                 sx={{mb: '30px'}}
                 onChange={(e) => setCode(e.target.value)}
@@ -41,7 +41,7 @@ const ModalAdd = ({active, setActive}) => {
             <Button
                 variant="contained"
                 color="success"
-                onClick={() => addSpeciality()}
+                onClick={() => addDirection()}
                 sx={{width: 'fit-content'}}
             >
                 Добавить

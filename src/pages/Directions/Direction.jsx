@@ -1,21 +1,28 @@
-import React from 'react';
-import {useHistory} from "react-router-dom";
+import React, {useContext} from 'react';
 import {Switch, TableCell, TableRow} from "@mui/material";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 import {observer} from "mobx-react-lite";
+import {Context} from "../../index";
 
 const Direction = observer(({direction}) => {
+    const {store} = useContext(Context)
+
     const changeSwitch = (e) => {
         e.stopPropagation()
 
         direction.setActive(!direction.is_active)
     }
-    console.log(direction)
+
+    const deleteDirection = (e) => {
+        e.stopPropagation()
+
+        store.deleteDirection(direction.id)
+    }
+
     return (
         <TableRow
             sx={{ '&:nth-of-type(even)': { backgroundColor: '#f7f8fc' } }}
-            data-id={direction.id}
         >
             <TableCell align="center">{direction.id}</TableCell>
             <TableCell align="left">{direction.name}</TableCell>
@@ -31,7 +38,10 @@ const Direction = observer(({direction}) => {
                 <EditIcon/>
             </TableCell>
             <TableCell align="center">
-                <DeleteIcon color="error"/>
+                <DeleteIcon
+                    color="error"
+                    onClick={deleteDirection}
+                />
             </TableCell>
         </TableRow>
     );

@@ -1,4 +1,4 @@
-import './styles/App.css';
+import './styles/app.css';
 import Auth from "./pages/Auth/Auth";
 import {
     BrowserRouter as Router,

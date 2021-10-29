@@ -1,10 +1,9 @@
 import React from 'react';
 import {
     Modal as BasicModal,
-    Typography,
     Button
 } from '@mui/material';
-import "../styles/Modal.css";
+import "../styles/modal.css";
 
 const Modal = ({active, setActive, children}) => {
     return (
