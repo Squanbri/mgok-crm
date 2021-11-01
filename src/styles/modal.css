@@ -1,0 +1,19 @@
+.modal {
+    width: calc(100vw - 260px);
+    margin-left: 260px;
+}
+
+.modal-content {
+    background-color: #fff;
+    padding: 40px 50% 40px 60px;
+    display: flex;
+    flex-direction: column;
+}
+
+.modal-close {
+    position: absolute !important;
+    right: 60px;
+    top: 60px;
+    width: 120px;
+    height: 48px;
+}
