@@ -29,7 +29,7 @@ class Auth {
             localStorage.setItem('token', res.data)
             this.setAuth(true)
         } catch (e) {
-            const status = e.response.data.status
+            const status = e.response?.data.status
 
             if (status?.message === 'The provided credentials are incorrect') {
                 Errors.setError('Неправильный логин или пароль')

@@ -14,7 +14,7 @@
 .nav-links {
     width: 230px;
     list-style: none;
-    margin: auto auto calc(100vh - 320px);
+    margin: auto auto calc(100vh - 380px);
 }
 
 .nav-links__item {
