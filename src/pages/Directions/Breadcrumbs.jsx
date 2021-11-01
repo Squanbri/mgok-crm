@@ -15,9 +15,14 @@ const Breadcrumbs = ({speciality}) => {
                 color="inherit"
                 href="/"
             >
-                {speciality.name}
+                Специальности
             </Link>
-            <Typography color="text.primary">Breadcrumbs</Typography>
+            <Typography
+                color="text.primary"
+                className="breadcrumbs__item"
+            >
+                {speciality.name}
+            </Typography>
         </BreadcrumbsBlock>
     );
 };
