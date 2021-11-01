@@ -9,9 +9,11 @@
 
 body {
   background-color: #F7F8FC;
+  padding-left: 260px;
 }
 
 main {
   min-height: 100vh;
   display: flex;
+  width: 100%;
 }

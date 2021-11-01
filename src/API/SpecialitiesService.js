@@ -1,4 +1,5 @@
 import axios from "axios";
+import Errors from "../store/errors";
 
 export default class SpecialitiesService {
     static async fetchSpecialities() {
@@ -32,20 +33,36 @@ export default class SpecialitiesService {
                 Authorization: `Bearer ${token}`
             }
         }
-        const response = await axios.post(`http://jn.mgok.moscow/public/api/admin/specialities`, data, config)
-        return response.data
+
+        try {
+            const response = await axios.post(`http://jn.mgok.moscow/public/api/admin/specialities`, data, config)
+            return response.data
+        } catch (e) {
+           this.setErrors(e.response.data.data)
+        }
     }
 
-    static async updateSpeciality() {
+    static async updateSpeciality(id, name, code, active) {
         const token = localStorage.getItem('token')
+
+        const data = {
+            name,
+            fgos_code: code,
+            is_active: active
+        }
 
         const config = {
             headers: {
                 Authorization: `Bearer ${token}`
             }
         }
-        const response = await axios.get(`http://jn.mgok.moscow/public/api/specialities`, config)
-        return response.data
+
+        try {
+            const response = await axios.put(`http://jn.mgok.moscow/public/api/admin/specialities/${id}`, data, config)
+            return response.data
+        } catch (e) {
+            this.setErrors(e.response.data.data)
+        }
     }
 
     static async deleteSpeciality(id) {
@@ -58,5 +75,22 @@ export default class SpecialitiesService {
         }
         const response = await axios.delete(`http://jn.mgok.moscow/public/api/admin/specialities/${id}`, config)
         return response.data
+    }
+
+    static setErrors(errors) {
+        const errorFields = errors
+
+        for(const errorField in errorFields) {
+            const errors = errorFields[errorField]
+
+            errors.forEach(error => {
+                if (errorField === 'name') {
+                    Errors.setError(error.replace('name', '"название специальности"'))
+                } else if (errorField === 'fgos_code') {
+                    Errors.setError(error.replace('fgos code', '"код специальности"'))
+                }
+
+            })
+        }
     }
 }

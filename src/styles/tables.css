@@ -1,17 +1,3 @@
-.section-header {
-    padding: 60px;
-    display: flex;
-}
-
-.text-header {
-    color: #000000;
-    font-size: 32px;
-    margin-bottom: 30px;
-}
-
-
-
-
 /* Table */
 .speciality-table {
     margin-bottom: 60px;
@@ -30,4 +16,20 @@
 tr {
     cursor: pointer;
     text-decoration: none;
+}
+
+tbody tr:hover {
+    background-color: #d6d8db8a !important;
+}
+
+.edit-icon,
+.delete-icon {
+    opacity: .85;
+    transition: all .15s ease-in-out !important;
+}
+
+.edit-icon:hover,
+.delete-icon:hover {
+    opacity: 1;
+    transform: scale(1.1);
 }

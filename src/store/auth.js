@@ -1,27 +1,21 @@
 import {makeAutoObservable} from "mobx";
 import AuthService from "../API/AuthService";
+import Errors from "./errors";
 
 class Auth {
     constructor() {
         this._isAuth = false
-        this._errors = []
         makeAutoObservable(this)
+
+        this.check()
     }
 
     setAuth(boolean) {
         this._isAuth = boolean
     }
 
-    setError(string) {
-        this._errors.push(string)
-    }
-
     get isAuth() {
         return this._isAuth
-    }
-
-    get errors() {
-        return this._errors
     }
 
     check() { // called once from app.js
@@ -37,9 +31,8 @@ class Auth {
         } catch (e) {
             const status = e.response.data.status
 
-            this._errors = [];
             if (status?.message === 'The provided credentials are incorrect') {
-                this.setError('Неправильный логин или пароль')
+                Errors.setError('Неправильный логин или пароль')
             }
         }
     }

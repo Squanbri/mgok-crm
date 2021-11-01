@@ -1,28 +1,44 @@
 import React, {useContext, useEffect, useState} from 'react';
-import {Context} from "../../index";
 import {Paper, Table, TableBody, TableContainer} from "@mui/material";
 import {useParams} from "react-router-dom";
 import {observer} from "mobx-react-lite";
 
+import {Context} from "../../index";
 import DirectionsHead from "./DirectionsHead";
 import TableHeader from "../Specialities/TableHeader";
-import ModalAdd from "./ModalAdd";
+import ModalCreate from "./ModalCreate";
 import Direction from "./Direction";
+import Loader from "../../components/Loader";
+import Breadcrumbs from "./Breadcrumbs";
 
 const Directions = observer(() => {
     const {id} = useParams();
     const {store} = useContext(Context)
     const [active, setActive] = useState(false)
+    const speciality = store.specialities.speciality
+    const isLoading = store.directions.isLoading
 
-    useEffect(() => {
-        store.fetchDirections(id)
-        store.fetchSpeciality(id)
+    useEffect(async () => {
+        store.directions.isLoading = true
+        await store.specialities.fetchSpeciality(id)
+        await store.directions.fetchDirections(id)
+        store.directions.isLoading = false
     }, [])
+
+    if (isLoading) {
+        return (
+            <>
+                <Loader/>
+            </>
+        )
+    }
 
     return (
         <section>
-            <DirectionsHead setActive={setActive}/>
-            <ModalAdd active={active} setActive={setActive} />
+            <Breadcrumbs speciality={speciality}/>
+
+            <DirectionsHead setActive={setActive} name={speciality?.name}/>
+            <ModalCreate active={active} setActive={setActive} />
 
             <div className="speciality-body">
                 <TableContainer
@@ -34,7 +50,7 @@ const Directions = observer(() => {
                         <TableHeader/>
 
                         <TableBody>
-                            {store.directions.map(direction => (
+                            {store.directions.list.map(direction => (
                                 <Direction direction={direction}  key={direction.id} />
                             ))}
                         </TableBody>

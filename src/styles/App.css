@@ -1,15 +1,13 @@
-.form-auth {
-  width: 400px;
-  margin: auto;
-  padding: 40px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+section {
+  width: 100%;
 }
 
-section {
-  width: calc(100vw - 260px);
-  margin-left: 260px;
+.section-header {
+  display: flex;
+}
+
+.header-content {
+  width: 75%;
 }
 
 .text-header {
@@ -17,13 +15,17 @@ section {
   font-size: 32px;
   line-height: 39px;
   color: #777777;
+  margin: 30px 60px;
+}
+
+.header-content__input {
+  width: min(635px, 50%);
+  margin: 0 0 30px 60px !important;
 }
 
 .header-add {
   position: absolute !important;
+  top: 60px;
   right: 40px;
-}
-
-.header-content {
-  width: 75%;
+;
 }

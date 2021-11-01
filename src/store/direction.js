@@ -5,16 +5,20 @@ class Direction {
         this.id = item.id
         this.name = item.name
         this.code = item.fgos_code
-        this.is_active = item.is_active
+        this.active = item.is_active
         makeAutoObservable(this)
     }
 
-    setActive(bool) {
-        this.is_active = bool
+    setName(name) {
+        this.name = name
     }
 
-    updateSpeciality() {
+    setCode(code) {
+        this.code = code
+    }
 
+    setActive(active) {
+        this.active = active
     }
 }
 

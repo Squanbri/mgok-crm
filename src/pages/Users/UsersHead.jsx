@@ -1,13 +1,12 @@
 import React from 'react';
 import {Button} from "@mui/material";
-import AddIcon from "@mui/icons-material/Add";
-import "../../styles/tables.css";
+import AddIcon from '@mui/icons-material/Add';
 
-const DirectionsHead = ({setActive, name}) => {
+const UsersHead = ({setActive}) => {
     return (
-        <div className="direction-header section-header">
+        <div className="speciality-header section-header">
             <div className="header-content">
-                <h3 className="text-header">{name}</h3>
+                <h3 className="text-header">Пользователи</h3>
             </div>
 
             <Button
@@ -23,4 +22,4 @@ const DirectionsHead = ({setActive, name}) => {
     );
 };
 
-export default DirectionsHead;
+export default UsersHead;

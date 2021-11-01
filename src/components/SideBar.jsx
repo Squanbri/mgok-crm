@@ -2,20 +2,20 @@ import React, {useContext} from 'react';
 import "../styles/sidiebar.css";
 import {ReactComponent as LogoSvg} from "../assets/icons/logo.svg";
 import {NavLink} from "react-router-dom";
-import Button from "./button";
 import {Context} from "../index";
+import {Button} from "@mui/material";
 
 const SideBar = () => {
     const {auth} = useContext(Context)
 
     return (
-        <nav>
+        <nav className="sidebar">
             <LogoSvg className="nav-logo"/>
 
             <ul className="nav-links">
                 <li className="nav-links__item">
-                    <NavLink to="/" className="nav-link">
-                        Специальность
+                    <NavLink exact to="/" className="nav-link">
+                        Специальности
                     </NavLink>
                 </li>
                 <li className="nav-links__item">
@@ -24,10 +24,15 @@ const SideBar = () => {
                 <li className="nav-links__item">
                     <NavLink  to="/subjects" className="nav-link">Предметы</NavLink>
                 </li>
+                <li className="nav-links__item">
+                    <NavLink  to="/users" className="nav-link">Пользователи</NavLink>
+                </li>
             </ul>
 
             <Button
-                className="btn-light"
+                variant="contained"
+                className="btn-exit"
+                color="error"
                 style={{
                     display: 'flex',
                     margin: 'auto'

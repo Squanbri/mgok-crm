@@ -1,10 +1,10 @@
 import {makeAutoObservable} from "mobx";
 
-class Speciality {
+class Subject {
     constructor(item) {
         this.id = item.id
         this.name = item.name
-        this.code = item.fgos_code
+        this.code = item.code
         this.active = item.is_active
         makeAutoObservable(this)
     }
@@ -22,4 +22,4 @@ class Speciality {
     }
 }
 
-export default Speciality
+export default Subject

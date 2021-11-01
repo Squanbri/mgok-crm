@@ -1,16 +1,19 @@
-import React, {useContext, useState} from 'react';
+import React, {useContext} from 'react';
 import Modal from "../../components/Modal";
-import {TextField, Button, Typography} from "@mui/material";
+import {Button, TextField, Typography} from "@mui/material";
 import {Context} from "../../index";
+import {observer} from "mobx-react-lite";
 
-const ModalAdd = ({active, setActive}) => {
-    const {store} = useContext(Context)
-    const [name, setName] = useState('')
-    const [code, setCode] = useState('')
+const ModalUpdate = observer(({active, setActive}) => {
+    const {store, modal} = useContext(Context)
 
-    const addSpeciality = () => {
+    const updateSpeciality = () => {
+        const id = modal.id
+        const name = modal.name
+        const code = modal.code
+        const active = modal.active
+        store.specialities.updateSpeciality(id, name, code, active)
         setActive(false)
-        store.addSpeciality(name, code)
     }
 
     return (
@@ -20,7 +23,7 @@ const ModalAdd = ({active, setActive}) => {
                 component="span"
                 sx={{mb: '30px'}}
             >
-                Добавить специальность
+                Изменить специальность
             </Typography>
 
             <TextField
@@ -28,26 +31,28 @@ const ModalAdd = ({active, setActive}) => {
                 label="Например: Искусство балета"
                 variant="outlined"
                 sx={{mb: '15px'}}
-                onChange={(e) => setName(e.target.value)}
+                value={modal.name}
+                onChange={(e) => modal.setName(e.target.value)}
             />
             <TextField
                 id="outlined-basic"
                 label="Например: 52.02.01"
                 variant="outlined"
                 sx={{mb: '30px'}}
-                onChange={(e) => setCode(e.target.value)}
+                value={modal.code}
+                onChange={(e) => modal.setCode(e.target.value)}
             />
 
             <Button
                 variant="contained"
                 color="success"
-                onClick={() => addSpeciality()}
+                onClick={() => updateSpeciality()}
                 sx={{width: 'fit-content'}}
             >
-                Добавить
+                Изменить
             </Button>
         </Modal>
     );
-};
+});
 
-export default ModalAdd;
+export default ModalUpdate;

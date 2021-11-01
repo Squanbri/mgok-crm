@@ -1,4 +1,4 @@
-nav {
+.sidebar {
     position: fixed;
     top: 0;
     left: 0;
@@ -22,6 +22,10 @@ nav {
     border-bottom: 1px solid #B1B0B0;
 }
 
+.nav-links__item .active {
+    text-decoration: underline;
+}
+
 .nav-link {
     text-decoration: none;
     color: #777777;
@@ -31,4 +35,9 @@ nav {
 
 .nav-link:hover {
     color: #adadad;
+}
+
+.btn-exit {
+    width: 120px;
+    height: 48px;
 }

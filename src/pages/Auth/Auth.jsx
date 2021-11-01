@@ -1,5 +1,7 @@
 import React, {useContext, useState} from 'react';
-import {Alert, Button, TextField} from "@mui/material";
+import {Button, TextField} from "@mui/material";
+
+import "../../styles/auth.css";
 
 import {Context} from "../../index";
 import {observer} from "mobx-react-lite";
@@ -35,16 +37,6 @@ const Auth = observer(() => {
             >
                 Войти
             </Button>
-
-            {auth.errors.map((error, index) =>
-                <Alert
-                    severity="error"
-                    key={index}
-                    sx={{ marginTop: '10px' }}
-                >
-                    {error}
-                </Alert>
-            )}
         </form>
     );
 });

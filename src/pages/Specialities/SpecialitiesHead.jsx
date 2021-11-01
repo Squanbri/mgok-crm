@@ -1,6 +1,5 @@
 import React from 'react';
-import Input from "../../components/input";
-import {Button} from "@mui/material";
+import {Button, TextField} from "@mui/material";
 import AddIcon from '@mui/icons-material/Add';
 
 const SpecialitiesHead = ({setActive}) => {
@@ -8,8 +7,10 @@ const SpecialitiesHead = ({setActive}) => {
         <div className="speciality-header section-header">
             <div className="header-content">
                 <h3 className="text-header">Специальность</h3>
-                <Input
-                    placeholder="Например: токарь"
+                <TextField
+                    className="header-content__input"
+                    label="Наименование специальности"
+                    variant="outlined"
                 />
             </div>
 

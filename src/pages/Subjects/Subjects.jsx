@@ -2,23 +2,23 @@ import React, {useContext, useEffect, useState} from 'react';
 import {Paper, Table, TableBody, TableContainer} from "@mui/material";
 import {observer} from "mobx-react-lite";
 
-import "../../styles/tables.css";
 import {Context} from "../../index";
-import Speciality from "./Speciality";
-import SpecialitiesHead from "./SpecialitiesHead";
-import ModalCreate from "./ModalCreate";
 import Loader from "../../components/Loader";
+import ModalCreate from "../Subjects/ModalCreate";
 import TableHeader from "./TableHeader";
+import Subject from "./Subject";
+import SubjectsHead from "./SubjectsHead";
+import "../../styles/subjects.css";
 
-const Specialities = observer(() => {
+const Subjects = observer(() => {
     const {store} = useContext(Context)
     const [active, setActive] = useState(false)
-    const specialities = store.specialities
-    const isLoading = store.specialities.isLoading
+    const subjects = store.subjects
+    const isLoading = store.subjects.isLoading
 
     useEffect(async () => {
-        await specialities.fetchSpecialities()
-        store.specialities.isLoading = false
+        await subjects.fetchSubjects()
+        store.subjects.isLoading = false
     }, [])
 
     if (isLoading) {
@@ -31,7 +31,7 @@ const Specialities = observer(() => {
 
     return (
         <section>
-            <SpecialitiesHead setActive={setActive}/>
+            <SubjectsHead setActive={setActive}/>
             <ModalCreate active={active} setActive={setActive} />
 
             <div className="speciality-body">
@@ -44,8 +44,8 @@ const Specialities = observer(() => {
                         <TableHeader/>
 
                         <TableBody>
-                            {specialities.list.map(spec => (
-                                <Speciality spec={spec}  key={spec.id} />
+                            {subjects.list.map(subject => (
+                                <Subject subject={subject}  key={subject.id} />
                             ))}
                         </TableBody>
                     </Table>
@@ -55,4 +55,4 @@ const Specialities = observer(() => {
     );
 });
 
-export default Specialities;
+export default Subjects;
