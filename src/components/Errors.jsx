@@ -8,6 +8,7 @@ import "../styles/errors.css";
 
 const Errors = observer(() => {
     const { errors } = useContext(Context)
+
     return (
         <div>
             {errors.isLength &&

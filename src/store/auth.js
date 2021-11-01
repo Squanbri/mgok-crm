@@ -24,16 +24,10 @@ class Auth {
     }
 
     async login(email, password) {
-        try {
-            const res = await AuthService.login(email, password)
+        const res = await AuthService.login(email, password)
+        if (res?.data !== undefined) {
             localStorage.setItem('token', res.data)
             this.setAuth(true)
-        } catch (e) {
-            const status = e.response?.data.status
-
-            if (status?.message === 'The provided credentials are incorrect') {
-                Errors.setError('Неправильный логин или пароль')
-            }
         }
     }
 
