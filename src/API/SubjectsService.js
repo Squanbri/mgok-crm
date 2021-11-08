@@ -66,19 +66,11 @@ export default class subjectsService {
     }
 
     static setErrors(errors) {
-        const errorFields = errors
-
-        for(const errorField in errorFields) {
-            const errors = errorFields[errorField]
-
-            errors.forEach(error => {
-                if (errorField === 'name') {
-                    Errors.setError(error.replace('name', '"название предмета"'))
-                } else if (errorField === 'code') {
-                    Errors.setError(error.replace('code', '"код предмета"'))
-                }
-
-            })
+        const collection = {
+            name: 'название предмета',
+            'fgos code': 'код предмета',
         }
+        
+        Errors.setErrors(errors, collection)
     }
 }

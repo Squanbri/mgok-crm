@@ -5,7 +5,7 @@ import {observer} from "mobx-react-lite";
 
 import {Context} from "../../index";
 import DirectionsHead from "./DirectionsHead";
-import TableHeader from "../Specialities/TableHeader";
+import TableHeader from "./TableHeader";
 import ModalCreate from "./ModalCreate";
 import Direction from "./Direction";
 import Loader from "../../components/Loader";

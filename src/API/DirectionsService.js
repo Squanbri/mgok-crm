@@ -3,8 +3,12 @@ import Errors from "../store/errors";
 
 export default class DirectionsService {
     static async fetchDirections(id) {
-        const response = await axios.get(`http://jn.mgok.moscow/public/api/specialities/${id}/directions`)
-        return response.data
+        try {
+            const response = await axios.get(`http://jn.mgok.moscow/public/api/specialities/${id}/directions`)
+            return response.data
+        } catch (e) {
+            console.log(e)
+        }
     }
 
     static async postDirection(name, code, specialityId) {
@@ -67,19 +71,11 @@ export default class DirectionsService {
     }
 
     static setErrors(errors) {
-        const errorFields = errors
-
-        for(const errorField in errorFields) {
-            const errors = errorFields[errorField]
-
-            errors.forEach(error => {
-                if (errorField === 'name') {
-                    Errors.setError(error.replace('name', '"название квалификации"'))
-                } else if (errorField === 'fgos_code') {
-                    Errors.setError(error.replace('fgos code', '"код квалификации"'))
-                }
-
-            })
+        const collection = {
+            name: 'название квалификации',
+            'fgos code': 'код квалификации',
         }
+        
+        Errors.setErrors(errors, collection)
     }
 }

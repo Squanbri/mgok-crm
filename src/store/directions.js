@@ -31,9 +31,11 @@ class Directions {
         this.directions.clear()
         const res = await DirectionsAPI.fetchDirections(id)
 
-        res.data.forEach(item => {
-            this.setDirection(item)
-        })
+        if (res) {
+            res.data.forEach(item => {
+                this.setDirection(item)
+            })
+        }
     }
 
     // ADD

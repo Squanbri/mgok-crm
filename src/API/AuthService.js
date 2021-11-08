@@ -5,9 +5,10 @@ export default class AuthService {
     static async login(email, password) {
         try {
             const response = await axios.post(`http://jn.mgok.moscow/public/api/auth/login`, {email, password})
+
             return response.data
         } catch (e) {
-            this.setErrors(e.response)
+            this.setErrors(e.response.data);
         }
     }
 
@@ -21,21 +22,17 @@ export default class AuthService {
         return response.data
     }
 
-    static setErrors(errors) {
-        const errorFields = errors?.data.data
+    static setErrors(data) {
+        const collection = {
+            password: 'пароль',
+        }
 
-        for(const errorField in errorFields) {
-            const errors = errorFields[errorField]
-
-            errors.forEach(error => {
-                console.log(error)
-                if (errorField === 'password') {
-                    Errors.setError(error.replace('password ', '"пароль"'))
-                } else {
-                    Errors.setError(error)
-                }
-
-            })
+        const errors = data?.data
+        
+        if (errors === undefined) {
+            Errors.setError('Неправильный логин или пароль')
+        } else {
+            Errors.setErrors(errors, collection)
         }
     }
 }

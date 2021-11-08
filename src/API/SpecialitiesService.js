@@ -78,19 +78,11 @@ export default class SpecialitiesService {
     }
 
     static setErrors(errors) {
-        const errorFields = errors
-
-        for(const errorField in errorFields) {
-            const errors = errorFields[errorField]
-
-            errors.forEach(error => {
-                if (errorField === 'name') {
-                    Errors.setError(error.replace('name', '"название специальности"'))
-                } else if (errorField === 'fgos_code') {
-                    Errors.setError(error.replace('fgos code', '"код специальности"'))
-                }
-
-            })
+        const collection = {
+            name: 'название специальности',
+            'fgos code': 'код специальности',
         }
+        
+        Errors.setErrors(errors, collection)
     }
 }

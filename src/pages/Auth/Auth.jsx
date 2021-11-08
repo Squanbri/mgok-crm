@@ -1,5 +1,5 @@
 import React, {useContext, useState} from 'react';
-import {Button, TextField} from "@mui/material";
+import {Button, TextField, Typography} from "@mui/material";
 
 import "../../styles/auth.css";
 
@@ -13,6 +13,17 @@ const Auth = observer(() => {
 
     return (
         <form className="form-auth">
+            <Typography
+                color="text.primary"
+                className="breadcrumbs__item"
+                sx={{
+                    fontSize: '28px',
+                    fontWeight: 'bold',
+                    marginBottom: '4px'
+                }}
+            >
+                Авторизация
+            </Typography>
             <TextField
                 label="Email"
                 type="text"

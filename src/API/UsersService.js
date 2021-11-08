@@ -55,27 +55,14 @@ export default class UsersService {
     }
 
     static setErrors(errors) {
-        const errorFields = errors
-
-        for(const errorField in errorFields) {
-            const errors = errorFields[errorField]
-
-            errors.forEach(error => {
-                if (errorField === 'first_name') {
-                    Errors.setError(error.replace('first name', '"имя"'))
-                } else if (errorField === 'last_name') {
-                    Errors.setError(error.replace('last name', '"фамилия"'))
-                } else if (errorField === 'password') {
-                    Errors.setError(error.replace('password', '"пароль"'))
-                } else if (errorField === 'phone') {
-                    Errors.setError(error.replace('phone', '"телефон"'))
-                } else if (errorField === 'position') {
-                    Errors.setError(error.replace('position', '"должность"'))
-                } else {
-                    Errors.setError(error)
-                }
-
-            })
+        const collection = {
+            'first name': 'имя',
+            'last name': 'фамилия',
+            'password': 'пароль',
+            'phone': 'телефон',
+            'position': 'должность',
         }
+        
+        Errors.setErrors(errors, collection)
     }
 }
