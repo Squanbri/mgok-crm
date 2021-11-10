@@ -3,7 +3,7 @@ import Errors from "../store/errors";
 
 export default class subjectsService {
     static async fetchSubjects() {
-        const response = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/public/api/subjects`)
+        const response = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/api/subjects`)
         return response.data
     }
 
@@ -16,7 +16,7 @@ export default class subjectsService {
             }
         }
 
-        const response = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/public/api/admin/subjects/${id}`, config)
+        const response = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/api/admin/subjects/${id}`, config)
         return response.data
     }
 
@@ -35,7 +35,7 @@ export default class subjectsService {
         }
 
         try {
-            const response = await axios.post(`${process.env.REACT_APP_BACKEND_URL}/public/api/admin/subjects`, data, config)
+            const response = await axios.post(`${process.env.REACT_APP_BACKEND_URL}/api/admin/subjects`, data, config)
             return response.data
         } catch (e) {
             this.setErrors(e.response.data.data)
@@ -58,7 +58,7 @@ export default class subjectsService {
         }
 
         try {
-            const response = await axios.put(`${process.env.REACT_APP_BACKEND_URL}/public/api/admin/subjects/${id}`, data, config)
+            const response = await axios.put(`${process.env.REACT_APP_BACKEND_URL}/api/admin/subjects/${id}`, data, config)
             return response.data
         } catch (e) {
             this.setErrors(e.response.data.data)

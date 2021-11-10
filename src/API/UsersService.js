@@ -11,7 +11,7 @@ export default class UsersService {
             }
         }
 
-        const response = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/public/api/admin/users`, config)
+        const response = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/api/admin/users`, config)
         return response.data
     }
 
@@ -24,7 +24,7 @@ export default class UsersService {
             }
         }
 
-        const response = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/public/api/admin/specialities/${id}`, config)
+        const response = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/api/admin/specialities/${id}`, config)
         return response.data
     }
 
@@ -47,7 +47,7 @@ export default class UsersService {
         }
 
         try {
-            const response = await axios.post(`${process.env.REACT_APP_BACKEND_URL}/public/api/admin/users`, data, config)
+            const response = await axios.post(`${process.env.REACT_APP_BACKEND_URL}/api/admin/users`, data, config)
             return response.data
         } catch (e) {
             this.setErrors(e.response.data.data)

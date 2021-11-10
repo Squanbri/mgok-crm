@@ -13,7 +13,7 @@ export default class SpecialitiesService {
 
     try {
       const response = await axios.get(
-        `${process.env.REACT_APP_BACKEND_URL}/public/api/admin/specialities`, 
+        `${process.env.REACT_APP_BACKEND_URL}/api/admin/specialities`, 
         config
       );
       return response.data;
@@ -33,7 +33,7 @@ export default class SpecialitiesService {
   
     try {
       const response = await axios.get(
-        `${process.env.REACT_APP_BACKEND_URL}/public/api/admin/specialities/${id}`,
+        `${process.env.REACT_APP_BACKEND_URL}/api/admin/specialities/${id}`,
         config
       );
       return response.data;
@@ -58,7 +58,7 @@ export default class SpecialitiesService {
 
     try {
       const response = await axios.post(
-        `${process.env.REACT_APP_BACKEND_URL}/public/api/admin/specialities`,
+        `${process.env.REACT_APP_BACKEND_URL}/api/admin/specialities`,
         data,
         config
       );
@@ -85,7 +85,7 @@ export default class SpecialitiesService {
 
     try {
       const response = await axios.put(
-        `${process.env.REACT_APP_BACKEND_URL}/public/api/admin/specialities/${id}`,
+        `${process.env.REACT_APP_BACKEND_URL}/api/admin/specialities/${id}`,
         data,
         config
       );
@@ -104,7 +104,7 @@ export default class SpecialitiesService {
       },
     };
     const response = await axios.delete(
-      `${process.env.REACT_APP_BACKEND_URL}/public/api/admin/specialities/${id}`,
+      `${process.env.REACT_APP_BACKEND_URL}/api/admin/specialities/${id}`,
       config
     );
     return response.data;

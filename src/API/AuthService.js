@@ -4,7 +4,7 @@ import Errors from "../store/errors";
 export default class AuthService {
     static async login(email, password) {
         try {
-            const response = await axios.post(`${process.env.REACT_APP_BACKEND_URL}/public/api/auth/login`, {email, password})
+            const response = await axios.post(`${process.env.REACT_APP_BACKEND_URL}/api/auth/login`, {email, password})
 
             return response.data
         } catch (e) {
@@ -14,7 +14,7 @@ export default class AuthService {
 
     static async logout() {
         const token = localStorage.getItem('token')
-        const response = await axios.delete(`${process.env.REACT_APP_BACKEND_URL}/public/api/auth/logout`, {
+        const response = await axios.delete(`${process.env.REACT_APP_BACKEND_URL}/api/auth/logout`, {
             headers: {
                 Authorization: `Bearer ${token}`
             }

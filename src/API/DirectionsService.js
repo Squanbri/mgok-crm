@@ -13,7 +13,7 @@ export default class DirectionsService {
 
     try {
       const response = await axios.get(
-        `${process.env.REACT_APP_BACKEND_URL}/public/api/admin/specialities/${id}/directions`,
+        `${process.env.REACT_APP_BACKEND_URL}/api/admin/specialities/${id}/directions`,
         config
       );
       return response.data;
@@ -39,7 +39,7 @@ export default class DirectionsService {
 
     try {
       const response = await axios.post(
-        `${process.env.REACT_APP_BACKEND_URL}/public/api/admin/specialities/${specialityId}/directions`,
+        `${process.env.REACT_APP_BACKEND_URL}/api/admin/specialities/${specialityId}/directions`,
         data,
         config
       );
@@ -66,7 +66,7 @@ export default class DirectionsService {
 
     try {
       const response = await axios.put(
-        `${process.env.REACT_APP_BACKEND_URL}/public/api/admin/directions/${id}`,
+        `${process.env.REACT_APP_BACKEND_URL}/api/admin/directions/${id}`,
         data,
         config
       );
@@ -85,7 +85,7 @@ export default class DirectionsService {
       },
     };
     const response = await axios.delete(
-      `${process.env.REACT_APP_BACKEND_URL}/public/api/admin/directions/${id}`,
+      `${process.env.REACT_APP_BACKEND_URL}/api/admin/directions/${id}`,
       config
     );
     return response.data;
