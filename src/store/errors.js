@@ -17,7 +17,7 @@ class Errors {
 
     static setErrors(response, collection) {
         const errors = this.pullErrors(response, collection);
-        console.log(errors)
+        
         if (errors) {
             Object.keys(errors).forEach(errorKey => {
                 const fieldErrors = errors[errorKey]
@@ -27,7 +27,11 @@ class Errors {
     }
 
     static pullErrors(response, collection) {
-        const data =  response.data
+        const data =  response?.data
+
+        if (data === undefined) 
+            return false
+
 
         if (data.errors === undefined) {
             const message = data.message

@@ -8,7 +8,7 @@ export default class AuthService {
 
             return response.data
         } catch (e) {
-            this.setErrors(e.response.data);
+            this.setErrors(e.response);
         }
     }
 
