@@ -1,6 +1,6 @@
 import {makeAutoObservable, observable, values} from "mobx";
+import DirectionsAPI from "../../API/DirectionsService";
 import Direction from "./direction";
-import DirectionsAPI from "../API/DirectionsService";
 
 class Directions {
     constructor() {
@@ -13,6 +13,10 @@ class Directions {
     setDirection(item) {
         const direction = new Direction(item)
         this.directions.set(item.id, direction)
+    }
+
+    setLoading(isLoading) {
+        this.isLoading = isLoading
     }
 
     // GET
@@ -36,6 +40,7 @@ class Directions {
                 this.setDirection(item)
             })
         }
+        this.setLoading(false)
     }
 
     // ADD

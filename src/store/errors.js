@@ -11,19 +11,41 @@ class Errors {
         if (this.errors.indexOf(error) === -1) {
             this.errors.push(error) // Добавить ошибку
 
-            setTimeout(() => {
-                this.errors.remove(error)
-            }, 3000) // Убрать ошибку через 3 сек
+            setTimeout(() => this.errors.remove(error), 3000) // Убрать ошибку через 3 сек
         }
     }
 
-    static setErrors(errors, collection) {
-        this.replaceNameFields(errors, collection)
-        
-        Object.keys(errors).forEach(errorKey => {
-            const fieldErrors = errors[errorKey]
-            fieldErrors.forEach(error => this.setError(error))            
-        })
+    static setErrors(response, collection) {
+        const errors = this.pullErrors(response, collection);
+        console.log(errors)
+        if (errors) {
+            Object.keys(errors).forEach(errorKey => {
+                const fieldErrors = errors[errorKey]
+                fieldErrors.forEach(error => this.setError(error))            
+            })
+        }
+    }
+
+    static pullErrors(response, collection) {
+        const data =  response.data
+
+        if (data.errors === undefined) {
+            const message = data.message
+            
+            switch(message) {
+                case 'Unauthenticated.': 
+                    localStorage.removeItem('token')
+                    window.location.reload()                    
+                    break
+                default:
+                    this.setError(message)
+                    break
+            }
+
+            return false   
+        } else {
+            return this.replaceNameFields(data.errors, collection)
+        }
     }
 
     // Замена название поля из бд, на название для пользователей
@@ -41,7 +63,9 @@ class Errors {
                 })
                 return error
             })
-        })    
+        })   
+        
+        return errors
     }
 
     static get isLength() {

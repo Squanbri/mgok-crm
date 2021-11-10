@@ -1,5 +1,5 @@
 import {makeAutoObservable, observable, values} from "mobx";
-import UsersAPI from "../API/UsersService";
+import UsersAPI from "../../API/UsersService";
 import User from "./user";
 
 class Users {

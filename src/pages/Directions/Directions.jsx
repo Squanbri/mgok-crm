@@ -18,11 +18,13 @@ const Directions = observer(() => {
     const speciality = store.specialities.speciality
     const isLoading = store.directions.isLoading
 
-    useEffect(async () => {
-        store.directions.isLoading = true
-        await store.specialities.fetchSpeciality(id)
-        await store.directions.fetchDirections(id)
-        store.directions.isLoading = false
+    useEffect(() => {
+        const fetchData = async () => {
+            await store.specialities.fetchSpeciality(id)
+            await store.directions.fetchDirections(id)
+        }
+        fetchData()
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
     if (isLoading) {
@@ -48,7 +50,7 @@ const Directions = observer(() => {
                 >
                     <Table>
                         <TableHeader/>
-
+                        {console.log('render')}
                         <TableBody>
                             {store.directions.list.map(direction => (
                                 <Direction direction={direction}  key={direction.id} />

@@ -16,9 +16,13 @@ const Subjects = observer(() => {
     const subjects = store.subjects
     const isLoading = store.subjects.isLoading
 
-    useEffect(async () => {
-        await subjects.fetchSubjects()
-        store.subjects.isLoading = false
+    useEffect(() => {
+        const fetchData = async () => {
+            await subjects.fetchSubjects()
+            store.subjects.isLoading = false
+        }
+        fetchData()
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
     if (isLoading) {

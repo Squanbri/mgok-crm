@@ -6,6 +6,7 @@ class Modal {
         this.name = ''
         this.code = ''
         this.active = undefined
+        this.isActiveCreate = false
         makeAutoObservable(this)
     }
 
@@ -23,6 +24,10 @@ class Modal {
 
     setActive(active) {
         this.active = active
+    }
+
+    setActiveCreate = (isActiveCreate) => {
+        this.isActiveCreate = isActiveCreate
     }
 
     get isActive() {

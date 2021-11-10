@@ -1,6 +1,5 @@
 import {makeAutoObservable} from "mobx";
 import AuthService from "../API/AuthService";
-import Errors from "./errors";
 
 class Auth {
     constructor() {

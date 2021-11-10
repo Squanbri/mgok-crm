@@ -1,8 +1,8 @@
 import {makeAutoObservable} from "mobx";
-import Specialities from "./specialities";
-import Directions from "./directions";
-import Subjects from "./subjects";
-import Users from "./users";
+import Specialities from "./specialities/specialities";
+import Directions from "./directions/directions";
+import Subjects from "./subjects/subjects";
+import Users from "./users/users";
 
 class Store {
     constructor() {

@@ -15,9 +15,13 @@ const Users = observer(() => {
     const users = store.users
     const isLoading = store.subjects.isLoading
 
-    useEffect(async () => {
-        await users.fetchUsers()
-        store.subjects.isLoading = false
+    useEffect(() => {
+        const fetchData = async () => {
+            await users.fetchUsers()
+            store.subjects.isLoading = false
+        }
+        fetchData()
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
     if (isLoading) {

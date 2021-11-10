@@ -1,24 +1,26 @@
-import React, {useContext, useEffect, useState} from 'react';
-import {Paper, Table, TableBody, TableContainer} from "@mui/material";
+import React, {useContext, useEffect} from 'react';
+import {Paper, Table, TableBody, TableContainer, TextField} from "@mui/material";
 import {observer} from "mobx-react-lite";
 
-import "../../styles/tables.css";
 import {Context} from "../../index";
-import Speciality from "./Speciality";
-import SpecialitiesHead from "./SpecialitiesHead";
 import ModalCreate from "./ModalCreate";
-import Loader from "../../components/Loader";
 import TableHeader from "./TableHeader";
+import Speciality from "./Speciality";
+import Loader from "../../components/Loader";
+import PageHead from "../../components/PageHead";
+import "../../styles/tables.css";
 
 const Specialities = observer(() => {
     const {store} = useContext(Context)
-    const [active, setActive] = useState(false)
     const specialities = store.specialities
     const isLoading = store.specialities.isLoading
 
-    useEffect(async () => {
-        await specialities.fetchSpecialities()
-        store.specialities.isLoading = false
+    useEffect(() => {
+        const fetchData = async () => {
+            await specialities.fetchSpecialities()
+        }
+        fetchData()
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
     if (isLoading) {
@@ -31,8 +33,15 @@ const Specialities = observer(() => {
 
     return (
         <section>
-            <SpecialitiesHead setActive={setActive}/>
-            <ModalCreate active={active} setActive={setActive} />
+            <PageHead>
+                <h3 className="text-header">Специальность</h3>
+                <TextField
+                    className="header-content__input"
+                    label="Наименование специальности"
+                    variant="outlined"
+                />
+            </PageHead>
+            <ModalCreate/>
 
             <div className="speciality-body">
                 <TableContainer

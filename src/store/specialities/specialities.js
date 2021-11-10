@@ -1,11 +1,10 @@
 import {makeAutoObservable, observable, values} from "mobx";
-import SpecialitiesAPI from "../API/SpecialitiesService";
+import SpecialitiesAPI from "../../API/SpecialitiesService";
 import Speciality from "./speciality";
 
 class Specialities {
     constructor() {
         this.isLoading = true;
-        this.speciality = undefined
         this.specialities = observable.map()
         makeAutoObservable(this)
     }
@@ -14,6 +13,10 @@ class Specialities {
     setSpeciality(item) {
         const speciality = new Speciality(item)
         this.specialities.set(item.id, speciality)
+    }
+
+    setLoading(isLoading) {
+        this.isLoading = isLoading
     }
 
     // GET
@@ -30,10 +33,10 @@ class Specialities {
     // FETCH ALL
     async fetchSpecialities() {
         const res = await SpecialitiesAPI.fetchSpecialities()
-
         res.data.forEach(item => {
             this.setSpeciality(item)
         })
+        this.setLoading(false)
     }
 
     // FETCH ONE

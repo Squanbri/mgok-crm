@@ -1,20 +1,22 @@
 import React, {useContext, useState} from 'react';
-import Modal from "../../components/Modal";
 import {TextField, Button, Typography} from "@mui/material";
+import {observer} from "mobx-react-lite";
+
+import Modal from "../../components/Modal";
 import {Context} from "../../index";
 
-const ModalCreate = ({active, setActive}) => {
-    const {store} = useContext(Context)
+const ModalCreate = observer(() => {
+    const {store, modal} = useContext(Context)
     const [name, setName] = useState('')
     const [code, setCode] = useState('')
 
     const addSpeciality = () => {
-        setActive(false)
+        modal.setActiveCreate(false)
         store.specialities.addSpeciality(name, code)
     }
 
     return (
-        <Modal active={active} setActive={setActive}>
+        <Modal active={modal.isActiveCreate} setActive={modal.setActiveCreate}>
             <Typography
                 variant="h4"
                 component="span"
@@ -48,6 +50,6 @@ const ModalCreate = ({active, setActive}) => {
             </Button>
         </Modal>
     );
-};
+});
 
 export default ModalCreate;

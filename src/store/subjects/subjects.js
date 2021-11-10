@@ -1,5 +1,5 @@
 import {makeAutoObservable, observable, values} from "mobx";
-import SubjectsAPI from "../API/SubjectsService";
+import SubjectsAPI from "../../API/SubjectsService";
 import Subject from "./subject";
 
 class Subjects {
