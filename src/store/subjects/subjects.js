@@ -25,7 +25,7 @@ class Subjects {
     async fetchSubjects() {
         const res = await SubjectsAPI.fetchSubjects()
 
-        res.data.forEach(item => {
+        res?.data.forEach(item => {
             this.setSubject(item)
         })
     }

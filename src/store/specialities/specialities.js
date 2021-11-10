@@ -33,7 +33,7 @@ class Specialities {
     // FETCH ALL
     async fetchSpecialities() {
         const res = await SpecialitiesAPI.fetchSpecialities()
-        res.data.forEach(item => {
+        res?.data.forEach(item => {
             this.setSpeciality(item)
         })
         this.setLoading(false)

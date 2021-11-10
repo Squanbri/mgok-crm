@@ -36,7 +36,7 @@ class Directions {
         const res = await DirectionsAPI.fetchDirections(id)
 
         if (res) {
-            res.data.forEach(item => {
+            res?.data.forEach(item => {
                 this.setDirection(item)
             })
         }
