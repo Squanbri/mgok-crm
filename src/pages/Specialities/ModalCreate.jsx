@@ -1,55 +1,51 @@
-import React, {useContext, useState} from 'react';
-import {TextField, Button, Typography} from "@mui/material";
-import {observer} from "mobx-react-lite";
+import React, { useContext } from "react";
+import { observer } from "mobx-react-lite";
 
+import { Context } from "../../index";
 import Modal from "../../components/Modal";
-import {Context} from "../../index";
+import TextField from "../../UI/TextField";
+import Button from "../../UI/Button";
+
+/* assets */
+import { ReactComponent as PlusIcon } from '../../assets/icons/add.svg';
 
 const ModalCreate = observer(() => {
-    const {store, modal} = useContext(Context)
-    const [name, setName] = useState('')
-    const [code, setCode] = useState('')
+  const { store, modal } = useContext(Context);
 
-    const addSpeciality = () => {
-        modal.setActiveCreate(false)
-        store.specialities.addSpeciality(name, code)
-    }
+  const addSpeciality = () => {
+    const name = modal.name
+    const code = modal.code
+    store.specialities.addSpeciality(name, code);
+    modal.setActiveCreate(false);
+  };
 
-    return (
-        <Modal active={modal.isActiveCreate} setActive={modal.setActiveCreate}>
-            <Typography
-                variant="h4"
-                component="span"
-                sx={{mb: '30px'}}
-            >
-                Добавить специальность
-            </Typography>
+  if (!modal.isActiveCreate) return null;
 
-            <TextField
-                id="outlined-basic"
-                label="Например: Искусство балета"
-                variant="outlined"
-                sx={{mb: '15px'}}
-                onChange={(e) => setName(e.target.value)}
-            />
-            <TextField
-                id="outlined-basic"
-                label="Например: 52.02.01"
-                variant="outlined"
-                sx={{mb: '30px'}}
-                onChange={(e) => setCode(e.target.value)}
-            />
+  return (
+    <Modal 
+      active={modal.isActiveCreate} 
+      setActive={modal.setActiveCreate} 
+      header={'Добавить специальность'}
+    >
+      <TextField
+        label="Специальность"
+        placeholder="Мастер слесарных работ"
+        onChange={(e) => modal.setName(e.target.value)}
+      />
+      <TextField
+        label="ФГОС"
+        placeholder="52.02.01"
+        onChange={(e) => modal.setCode(e.target.value)}
+      />
 
-            <Button
-                variant="contained"
-                color="success"
-                onClick={() => addSpeciality()}
-                sx={{width: 'fit-content'}}
-            >
-                Добавить
-            </Button>
-        </Modal>
-    );
+      <Button
+        onClick={addSpeciality}
+      >
+        Добавить
+        <PlusIcon/>
+      </Button>
+    </Modal>
+  );
 });
 
 export default ModalCreate;

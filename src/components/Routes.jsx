@@ -8,26 +8,28 @@ import Users from "../pages/Users/Users";
 
 const Routes = () => {
     return (
-        <Switch>
-            <Route exact path="/">
-                <Specialities/>
-            </Route>
-            <Route path="/directions/:id">
-                <Directions/>
-            </Route>
-            <Route path="/applications">
-                aplications
-            </Route>
-            <Route path="/subjects">
-                <Subjects/>
-            </Route>
-            <Route path="/users">
-                <Users/>
-            </Route>
-            <Route path="*">
-                <NotFound/>
-            </Route>
-        </Switch>
+        <main className="App">
+            <Switch>
+                <Route exact path="/">
+                    <Specialities/>
+                </Route>
+                <Route path="/directions/:id">
+                    <Directions/>
+                </Route>
+                <Route path="/applications">
+                    aplications
+                </Route>
+                <Route path="/subjects">
+                    <Subjects/>
+                </Route>
+                <Route path="/users">
+                    <Users/>
+                </Route>
+                <Route path="*">
+                    <NotFound/>
+                </Route>
+            </Switch>
+        </main>
     );
 };
 

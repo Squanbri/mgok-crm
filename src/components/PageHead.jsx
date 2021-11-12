@@ -1,31 +1,30 @@
 import React, {useContext} from 'react';
-import {Button} from "@mui/material";
-import AddIcon from "@mui/icons-material/Add";
 
-import {Context} from "../index";
-import "../styles/tables.css";
+import {Context} from '../index';
+import {ReactComponent as PlusIcon} from '../assets/icons/add.svg';
+import Button from '../UI/Button';
+import '../styles/pageheader.css';
 
 const PageHead = ({children}) => {
   const {modal} = useContext(Context)
 
   return (
-    <>
-      <div className="page-header">
-        <div className="page-header__content">
-          {children}
-        </div>
+    <div className="page-header__wrapper">
+      <div className="page-header__content">
+        {children}
+      </div>
 
+      <div className="header-button__add">
         <Button
-          className="header-add"
-          variant="contained"
-          sx={{ width: 120, height: 48, ml: 'auto', gap: .5 }}
           onClick={() => modal.setActiveCreate(true)}
         >
+      
+      
           Добавить
-          <AddIcon sx={{ fontSize: 18 }}/>
+          <PlusIcon/>
         </Button>
       </div>
-    </>
+    </div>
   )
 }
 

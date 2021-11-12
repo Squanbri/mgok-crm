@@ -1,38 +1,43 @@
-import {makeAutoObservable} from "mobx";
+import { makeAutoObservable } from "mobx";
 
 class Modal {
-    constructor() {
-        this.id = undefined
-        this.name = ''
-        this.code = ''
-        this.active = undefined
-        this.isActiveCreate = false
-        makeAutoObservable(this)
-    }
+  constructor() {
+    this.id = null;
+    this.name = "";
+    this.code = "";
+    this.active = ""; // this active for mobx module (speciality.active etc...) 
+    this.isActiveUpdate = false;
+    this.isActiveCreate = false;
+    makeAutoObservable(this);
+  }
 
-    setId(id) {
-        this.id = id
-    }
+  setId(id) {
+    this.id = id;
+  }
 
-    setName(name) {
-        this.name = name
-    }
+  setName(name) {
+    this.name = name;
+  }
 
-    setCode(code) {
-        this.code = code
-    }
+  setCode(code) {
+    this.code = code;
+  }
 
-    setActive(active) {
-        this.active = active
-    }
+  setActive(active) {
+    this.active = active;
+  }
 
-    setActiveCreate = (isActiveCreate) => {
-        this.isActiveCreate = isActiveCreate
-    }
+  setActiveCreate = (isActiveCreate) => {
+    this.isActiveCreate = isActiveCreate;
+  };
 
-    get isActive() {
-        return this.active === true
-    }
+  setActiveUpdate = (isActiveUpdate) => {
+    this.isActiveUpdate = isActiveUpdate;
+  };
+
+  get isActive() {
+    return this.active === true;
+  }
 }
 
-export default Modal
+export default Modal;

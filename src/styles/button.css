@@ -1,0 +1,46 @@
+.button__component {
+  padding: 5px 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  font-size: 17px;
+  line-height: 28px;
+  color: white;
+  background: #597E9D;
+  border-radius: 10px;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  transition: transform ease-in-out .5s;
+  max-width: fit-content;
+}
+
+.button__component::before,
+.button__component::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -150%;
+  width: 150%;
+  height: 150%;
+  background-color: #fff;
+  opacity: .2;
+  transform: rotate(45deg);
+  transition: all ease 1s;
+}
+
+.button__component:hover:after {
+  transition-delay: .2s;
+}
+
+.button__component:hover:before,
+.button__component:hover:after {
+  left: 100%;
+}
+
+.button__component:active {
+  transform: scale(0.988);
+}

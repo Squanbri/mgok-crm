@@ -5,6 +5,7 @@ import {observer} from "mobx-react-lite";
 import {Context} from "./index";
 import Auth from "./pages/Auth/Auth";
 import Errors from "./components/Errors";
+import Header from "./components/Header";
 import SideBar from "./components/SideBar";
 import Routes from "./components/Routes";
 import './styles/app.css';
@@ -24,14 +25,15 @@ const App = observer(() => {
     }
 
     return (
-        <main className="App">
+        <>
             <Errors/>
 
             <BrowserRouter>
+                <Header/>
                 <SideBar/>
                 <Routes/>
             </BrowserRouter>
-        </main>
+        </>
   );
 })
 

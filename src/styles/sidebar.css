@@ -1,10 +1,12 @@
 .sidebar {
     position: fixed;
-    top: 0;
+    top: 0px;
     left: 0;
     width: 260px;
     height: 100vh;
-    background-color: #D9D9D9;
+    background-color: #FFF;
+    padding-top: calc(60px + 62px);
+    z-index: 1;
 }
 
 .nav-logo {
@@ -19,11 +21,12 @@
 
 .nav-links__item {
     padding: 10px 0;
-    border-bottom: 1px solid #B1B0B0;
+    border-bottom: 1px solid #597E9D;
 }
 
 .nav-links__item .active {
-    text-decoration: underline;
+    color: #597E9D;
+    font-weight: 700;
 }
 
 .nav-link {
@@ -31,10 +34,11 @@
     color: #777777;
     font-size: 20px;
     transition: color .25s ease-in-out;
+    font-weight: 600;
 }
 
 .nav-link:hover {
-    color: #adadad;
+    color: #597e9dd2;
 }
 
 .btn-exit {

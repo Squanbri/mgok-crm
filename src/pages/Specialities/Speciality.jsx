@@ -1,83 +1,77 @@
-import React, {useContext, useState} from 'react';
-import {Switch, TableCell, TableRow} from "@mui/material";
-import EditIcon from '@mui/icons-material/Edit';
-import DeleteIcon from '@mui/icons-material/Delete';
-import {observer} from "mobx-react-lite";
-import {useHistory} from "react-router-dom";
-import {Context} from "../../index";
+import React, { useContext } from "react";
+import { observer } from "mobx-react-lite";
+import { useHistory } from "react-router-dom";
+
+import { Context } from "../../index";
 import ModalUpdate from "./ModalUpdate";
+import Switch from "../../UI/Switch";
 
-const Speciality = observer(({spec}) => {
-    const {store, modal} = useContext(Context)
-    const [active, setActive] = useState(false)
-    const history = useHistory()
+/* assets */
+import { ReactComponent as UpdateIcon } from '../../assets/icons/update.svg';
+import { ReactComponent as DeleteIcon } from '../../assets/icons/delete.svg';
 
-    const linkTo = () => {
-        history.push(`/directions/${spec.id}`)
-    }
+const Speciality = observer(({ spec }) => {
+  const { store, modal } = useContext(Context);
+  const history = useHistory();
 
-    const changeSwitch = (e) => {
-        e.stopPropagation()
+  const linkTo = () => {
+    history.push(`/directions/${spec.id}`);
+  };
 
-        const id = spec.id
-        const name = spec.name
-        const code = spec.code
-        const active = !spec.active
-        store.specialities.updateSpeciality(id, name, code, active)
-    }
+  const changeSwitch = () => {
 
-    const showModal = (e) => {
-        e.stopPropagation()
+    const id = spec.id;
+    const name = spec.name;
+    const code = spec.code;
+    const active = !spec.active;
+    store.specialities.updateSpeciality(id, name, code, active);
+  };
 
-        setActive(true)
-        modal.setId(spec.id)
-        modal.setName(spec.name)
-        modal.setCode(spec.code)
-        modal.setActive(spec.active)
-    }
+  const showModal = (e) => {
+    e.stopPropagation();
 
-    const deleteSpeciality = (e) => {
-        e.stopPropagation()
+    modal.setId(spec.id);
+    modal.setName(spec.name);
+    modal.setCode(spec.code);
+    modal.setActive(spec.active);
+    modal.setActiveUpdate(true);
+  };
 
-        store.specialities.deleteSpeciality(spec.id)
-    }
+  const deleteSpeciality = (e) => {
+    e.stopPropagation();
 
-    return (
-        <>
-            {active &&
-                <ModalUpdate active={active} setActive={setActive}/>
-            }
+    store.specialities.deleteSpeciality(spec.id);
+  };
 
-            <TableRow
-                sx={{ '&:nth-of-type(even)': { backgroundColor: '#f7f8fc' } }}
-                onClick={linkTo}
-            >
-                <TableCell align="center">{spec.id}</TableCell>
-                <TableCell align="left">{spec.name}</TableCell>
-                <TableCell align="right">{spec.code}</TableCell>
-                <TableCell align="center">
-                    <Switch
-                        checked={!!spec.active}
-                        onClick={changeSwitch}
-                        color="secondary"
-                    />
-                </TableCell>
-                <TableCell align="center">
-                    <EditIcon
-                        className="edit-icon"
-                        onClick={showModal}
-                    />
-                </TableCell>
-                <TableCell align="center">
-                    <DeleteIcon
-                        color="error"
-                        className="delete-icon"
-                        onClick={deleteSpeciality}
-                    />
-                </TableCell>
-            </TableRow>
-        </>
-    );
+  return (
+    <>
+      <ModalUpdate/>
+
+      <div className="table__row" onClick={linkTo}>
+        <div className="table__cell">{spec.id}</div>
+        <div className="table__cell">{spec.name}</div>
+        <div className="table__cell">{spec.code}</div>
+        <div className="table__cell" >
+          <Switch
+            checked={!!spec.active}
+            onChange={changeSwitch}
+          />
+        </div>
+        <div className="table__cell">
+          <div onClick={e => showModal(e)}>
+            <UpdateIcon className="edit-icon" />
+            <span className="update-text">Изменить</span>
+          </div>
+        </div>
+        <div className="table__cell">
+          <div onClick={e => deleteSpeciality(e)}>
+            <DeleteIcon className="delete-icon"/>
+            <span className="delete-text">Удалить</span>
+          </div>
+        </div>
+      </div>
+    </>
+  );
 });
 
 export default Speciality;

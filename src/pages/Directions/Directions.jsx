@@ -50,7 +50,6 @@ const Directions = observer(() => {
                 >
                     <Table>
                         <TableHeader/>
-                        {console.log('render')}
                         <TableBody>
                             {store.directions.list.map(direction => (
                                 <Direction direction={direction}  key={direction.id} />

@@ -24,6 +24,10 @@ class Specialities {
         return values(this.specialities)
     }
 
+    get isEmpty() {
+        return this.specialities.size === 0
+    }
+
     // DELETE
     deleteSpeciality(id) {
         this.specialities.delete(id)
@@ -33,7 +37,7 @@ class Specialities {
     // FETCH ALL
     async fetchSpecialities() {
         const res = await SpecialitiesAPI.fetchSpecialities()
-        res?.data.forEach(item => {
+        res.specialities?.forEach(item => {
             this.setSpeciality(item)
         })
         this.setLoading(false)
@@ -48,9 +52,9 @@ class Specialities {
     // ADD
     async addSpeciality(name, code) {
         const response = await SpecialitiesAPI.postSpeciality(name, code)
-        if (response?.status.success) {
-            const item = response.data
-            this.setSpeciality(item)
+        if (response?.speciality) {
+            const speciality = response.speciality
+            this.setSpeciality(speciality)
         }
     }
 
@@ -58,8 +62,7 @@ class Specialities {
     async updateSpeciality(id, name, code, active) {
         const response = await SpecialitiesAPI.updateSpeciality(id, name, code, active)
 
-
-        if (response?.status.success) {
+        if (response?.speciality) {
             const speciality = this.specialities.get(id)
             speciality.setName(name)
             speciality.setCode(code)

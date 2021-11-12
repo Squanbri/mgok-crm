@@ -1,67 +1,55 @@
-import React, {useContext, useEffect} from 'react';
-import {Paper, Table, TableBody, TableContainer, TextField} from "@mui/material";
-import {observer} from "mobx-react-lite";
+import React, { useContext } from "react";
+import { observer } from "mobx-react-lite";
 
-import {Context} from "../../index";
+import { Context } from "../../index";
+import useFetch from "../../hooks/useFetch";
 import ModalCreate from "./ModalCreate";
-import TableHeader from "./TableHeader";
-import Speciality from "./Speciality";
-import Loader from "../../components/Loader";
 import PageHead from "../../components/PageHead";
-import "../../styles/tables.css";
+import TableHeader from "./TableHeader";
+import SpecialitiesList from "./SpecialitiesList";
+import TextField2 from "../../UI/TextField";
+import { ReactComponent as SearchIcon } from '../../assets/icons/search.svg';
+import "../../styles/table.css";
+import "../../styles/specialitiesTable.css";
 
 const Specialities = observer(() => {
-    const {store} = useContext(Context)
-    const specialities = store.specialities
-    const isLoading = store.specialities.isLoading
+  const { store } = useContext(Context);
 
-    useEffect(() => {
-        const fetchData = async () => {
-            await specialities.fetchSpecialities()
-        }
-        fetchData()
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [])
+  useFetch(async () => {
+    await store.specialities.fetchSpecialities()
+  })
+  
+  // useEffect(() => {
+  //   const fetchData = async () => {
+  //     await store.specialities.fetchSpecialities();
+  //   };
+  //   fetchData();
+    
+  // }, []);
 
-    if (isLoading) {
-        return (
-            <>
-                <Loader/>
-            </>
-        )
-    }
+  return (
+    <section>
+      <ModalCreate />
+      <PageHead>
+        <h3 className="text-header">Специальность</h3>
+        <TextField2 
+          label="Наименование"
+          placeholder="Поиск специальности"
+        >
+          <SearchIcon/>
+        </TextField2>
+      </PageHead>
 
-    return (
-        <section>
-            <PageHead>
-                <h3 className="text-header">Специальность</h3>
-                <TextField
-                    className="header-content__input"
-                    label="Наименование специальности"
-                    variant="outlined"
-                />
-            </PageHead>
-            <ModalCreate/>
-
-            <div className="speciality-body">
-                <TableContainer
-                    className="speciality-table"
-                    component={Paper}
-                    sx={{boxShadow: 0}}
-                >
-                    <Table>
-                        <TableHeader/>
-
-                        <TableBody>
-                            {specialities.list.map(spec => (
-                                <Speciality spec={spec}  key={spec.id} />
-                            ))}
-                        </TableBody>
-                    </Table>
-                </TableContainer>
-            </div>
-        </section>
-    );
+      <div className="table">
+        <div className="table__head">
+          <TableHeader />
+        </div>
+        <div className="table__body">
+          <SpecialitiesList />
+        </div>
+      </div>
+    </section>
+  );
 });
 
 export default Specialities;

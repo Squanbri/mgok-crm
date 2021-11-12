@@ -8,12 +8,15 @@
 }
 
 body {
-  background-color: #F7F8FC;
-  padding-left: 260px;
+  background-color: #f7f8fd;
+  overflow-x: hidden;
+  color: #484C51;
 }
 
 main {
+  padding-top: 62px;
   min-height: 100vh;
   display: flex;
   width: 100%;
+  padding-left: 260px;
 }

@@ -1,0 +1,40 @@
+.input__wrapper {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 30px;
+}
+
+.input__label {
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 20px;
+  margin-bottom: 5px;
+}
+
+.input__block {
+  height: 51px;
+  border: 1px solid #484C51;
+  border-radius: 3px;
+  width: min(635px, 70%);
+  outline: none !important;
+  font-size: 16px;
+  padding-left: 15px;
+  color: #484C51;
+}
+
+.input__block:hover {
+  border: 1px solid #597e9d;
+}
+
+.input__block:focus {
+  border: none;
+  outline: 2px solid #597E9D !important;
+}
+
+.input__icon {
+  position: absolute;
+  /* transform: ; */
+  left: calc(min(635px, 50%) - 32px);
+  bottom: 8px;
+}

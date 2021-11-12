@@ -1,31 +1,26 @@
-import React from 'react';
-import {
-    Modal as BasicModal,
-    Button
-} from '@mui/material';
+import React from "react";
+
+import Button from "../UI/Button";
+import { ReactComponent as CloseIcon } from "../assets/icons/close.svg";
 import "../styles/modal.css";
 
-const Modal = ({active, setActive, children}) => {
-    return (
-        <BasicModal
-            open={active}
-            onClose={() => setActive(false)}
-            className="modal"
-        >
-            <div className="modal-content">
-                <Button
-                    variant="contained"
-                    color="error"
-                    className="modal-close"
-                    onClick={() => setActive(false)}
-                >
-                    Закрыть
-                </Button>
+const Modal = ({ setActive, header, children }) => {
+  return (
+    <div className="modal">
+      <div className="modal__content">
+        <h3 className="modal__header">{header}</h3>
 
-                {children}
-            </div>
-        </BasicModal>
-    );
+        {children}
+      </div>
+
+      <div className="modal__close">
+        <Button onClick={() => setActive(false)}>
+          Закрыть
+          <CloseIcon />
+        </Button>
+      </div>
+    </div>
+  );
 };
 
 export default Modal;

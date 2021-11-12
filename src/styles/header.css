@@ -1,0 +1,11 @@
+.header {
+  position: absolute;
+  width: 100vw;
+  height: 62px;
+  background-color: #597E9D;
+  z-index: 1000;
+}
+
+.header__logo {
+  margin: 15px 128px 15px 68px;
+}

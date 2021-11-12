@@ -1,22 +1,19 @@
 import React, {useContext} from 'react';
-import "../styles/sidiebar.css";
-import {ReactComponent as LogoSvg} from "../assets/icons/logo.svg";
 import {NavLink} from "react-router-dom";
 import {Context} from "../index";
 import {Button} from "@mui/material";
+
+import "../styles/sidebar.css";
 
 const SideBar = () => {
     const {auth} = useContext(Context)
 
     return (
         <nav className="sidebar">
-            <LogoSvg className="nav-logo"/>
 
             <ul className="nav-links">
                 <li className="nav-links__item">
-                    <NavLink exact to="/" className="nav-link">
-                        Специальности
-                    </NavLink>
+                    <NavLink exact to="/" className="nav-link">Специальности</NavLink>
                 </li>
                 <li className="nav-links__item">
                     <NavLink  to="/applications" className="nav-link">Заявки</NavLink>
