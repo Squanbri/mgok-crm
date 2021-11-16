@@ -3,7 +3,7 @@ import {Button, TextField, Typography} from "@mui/material";
 import {observer} from "mobx-react-lite";
 
 import {Context} from "../../index";
-import Modal from "../../components/Modal";
+import Modal from "../../UI/Modal";
 
 const ModalUpdate = observer(({active, setActive}) => {
     const {store, modal} = useContext(Context)

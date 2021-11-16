@@ -1,86 +1,71 @@
-import React, {useContext, useState} from 'react';
-import Modal from "../../components/Modal";
-import {TextField, Button, Typography} from "@mui/material";
-import {Context} from "../../index";
+import React, { useContext } from "react";
+import { observer } from "mobx-react-lite";
 
-const ModalCreate = ({active, setActive}) => {
-    const {store} = useContext(Context)
-    const [firstName, setFirstName] = useState('')
-    const [lastName, setLastName] = useState('')
-    const [position, setPosition] = useState('')
-    const [phone, setPhone] = useState('')
-    const [email, setEmail] = useState('')
-    const [password, setPassword] = useState('')
+import { Context } from "../../index";
+import Modal from "../../UI/Modal";
+import TextField from "../../UI/TextField";
+import Button from "../../UI/Button";
 
-    const addSpeciality = () => {
-        setActive(false)
-        store.users.addUser(firstName, lastName, position, phone, email, password)
-    }
+/* assets */
+import { ReactComponent as PlusIcon } from '../../assets/icons/add.svg';
 
-    return (
-        <Modal active={active} setActive={setActive}>
-            <Typography
-                variant="h4"
-                component="span"
-                sx={{mb: '30px'}}
-            >
-                Добавить пользователя
-            </Typography>
+const ModalCreate = observer(() => {
+  const { store, modal } = useContext(Context);
 
-            <TextField
-                label="Имя"
-                variant="outlined"
-                sx={{mb: '15px'}}
-                value={firstName}
-                onChange={(e) => setFirstName(e.target.value)}
-            />
-            <TextField
-                label="Фамилия"
-                variant="outlined"
-                sx={{mb: '30px'}}
-                value={lastName}
-                onChange={(e) => setLastName(e.target.value)}
-            />
-            <TextField
-                label="Должность"
-                variant="outlined"
-                sx={{mb: '30px'}}
-                value={position}
-                onChange={(e) => setPosition(e.target.value)}
-            />
-            <TextField
-                label="Телефон"
-                variant="outlined"
-                sx={{mb: '30px'}}
-                value={phone}
-                onChange={(e) => setPhone(e.target.value)}
-            />
-            <TextField
-                label="Email"
-                variant="outlined"
-                sx={{mb: '30px'}}
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-            />
-            <TextField
-                label="Пароль"
-                variant="outlined"
-                type="password"
-                sx={{mb: '30px'}}
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-            />
+  const addUser = () => {
+    const firstName = modal.firstName;
+    const lastName = modal.lastName;
+    const position = modal.position;
+    const phone = modal.phone;
+    const email = modal.email;
+    const password = modal.password;
+    store.users.addUser(firstName, lastName, position, phone, email, password);
+    modal.setActiveCreate(false);
+  };
 
-            <Button
-                variant="contained"
-                color="success"
-                onClick={() => addSpeciality()}
-                sx={{width: 'fit-content'}}
-            >
-                Добавить
-            </Button>
-        </Modal>
-    );
-};
+  return (
+    <Modal
+      active={modal.isActiveCreate}
+      setActive={modal.setActiveCreate}
+      header={"Добавить специальность"}
+    >
+      <TextField
+        label="Имя"
+        placeholder="Иван"
+        onChange={(e) => modal.setFirstName(e.target.value)}
+      />
+      <TextField
+        label="Фамилия"
+        placeholder="Иванов"
+        onChange={(e) => modal.setLastName(e.target.value)}
+      />
+      <TextField
+        label="Должность"
+        placeholder="ГК Траст"
+        onChange={(e) => modal.setPosition(e.target.value)}
+      />
+      <TextField
+        label="Номер телефона"
+        placeholder="+7 (999)-999-99-99"
+        onChange={(e) => modal.setPhone(e.target.value)}
+      />
+      <TextField
+        label="E-mail"
+        placeholder="Имя ящика"
+        onChange={(e) => modal.setEmail(e.target.value)}
+      />
+      <TextField
+        label="Пароль"
+        placeholder="*******"
+        onChange={(e) => modal.setPassword(e.target.value)}
+      />
+
+      <Button onClick={addUser}>
+        Добавить
+        <PlusIcon />
+      </Button>
+    </Modal>
+  );
+});
 
 export default ModalCreate;

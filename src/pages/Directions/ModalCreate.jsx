@@ -1,53 +1,52 @@
-import React, {useContext, useState} from 'react';
-import Modal from "../../components/Modal";
-import {TextField, Button, Typography} from "@mui/material";
-import {Context} from "../../index";
-import {useParams} from "react-router-dom";
+import React, { useContext } from "react";
+import { observer } from "mobx-react-lite";
 
-const ModalCreate = ({active, setActive}) => {
-    const {id} = useParams();
-    const {store} = useContext(Context)
-    const [name, setName] = useState('')
-    const [code, setCode] = useState('')
+import { Context } from "../../index";
+import Modal from "../../UI/Modal";
+import TextField from "../../UI/TextField";
+import Button from "../../UI/Button";
 
-    const addDirection = () => {
-        setActive(false)
-        store.directions.addDirection(name, code, id)
-    }
+/* assets */
+import { ReactComponent as PlusIcon } from '../../assets/icons/add.svg';
 
-    return (
-        <Modal active={active} setActive={setActive}>
-            <Typography
-                variant="h4"
-                component="span"
-                sx={{mb: '30px'}}
-            >
-                Добавить квалификацию
-            </Typography>
+const ModalCreate = observer(() => {
+  const { store, modal } = useContext(Context);
 
-            <TextField
-                label="Например: Токарь-универсал"
-                variant="outlined"
-                sx={{mb: '15px'}}
-                onChange={(e) => setName(e.target.value)}
-            />
-            <TextField
-                label="Например: 151902.04"
-                variant="outlined"
-                sx={{mb: '30px'}}
-                onChange={(e) => setCode(e.target.value)}
-            />
+  const addDirection = () => {
+    const specialityId = modal.id
+    const name = modal.name
+    const code = modal.code
+    store.directions.addDirection(name, code, specialityId)
+    modal.setActiveCreate(false);
+}
 
-            <Button
-                variant="contained"
-                color="success"
-                onClick={() => addDirection()}
-                sx={{width: 'fit-content'}}
-            >
-                Добавить
-            </Button>
-        </Modal>
-    );
-};
+  if (!modal.isActiveCreate) return null;
+
+  return (
+    <Modal 
+      active={modal.isActiveCreate} 
+      setActive={modal.setActiveCreate} 
+      header={'Добавить направление'}
+    >
+      <TextField
+        label="Направление"
+        placeholder="Мастер слесарных работ"
+        onChange={(e) => modal.setName(e.target.value)}
+      />
+      <TextField
+        label="ФГОС"
+        placeholder="52.02.01"
+        onChange={(e) => modal.setCode(e.target.value)}
+      />
+
+      <Button
+        onClick={addDirection}
+      >
+        Добавить
+        <PlusIcon/>
+      </Button>
+    </Modal>
+  );
+});
 
 export default ModalCreate;

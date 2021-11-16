@@ -21,6 +21,7 @@
   font-size: 16px;
   padding-left: 15px;
   color: #484C51;
+  background-color: rgba(0,0,0, 0);
 }
 
 .input__block:hover {

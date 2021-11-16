@@ -1,53 +1,49 @@
-import React, {useContext, useState} from 'react';
-import Modal from "../../components/Modal";
-import {TextField, Button, Typography} from "@mui/material";
-import {Context} from "../../index";
+import React, { useContext } from "react";
+import { observer } from "mobx-react-lite";
 
-const ModalCreate = ({active, setActive}) => {
-    const {store} = useContext(Context)
-    const [name, setName] = useState('')
-    const [code, setCode] = useState('')
+import { Context } from "../../index";
+import Modal from "../../UI/Modal";
+import TextField from "../../UI/TextField";
+import Button from "../../UI/Button";
 
-    const addSpeciality = () => {
-        setActive(false)
-        store.subjects.addSubject(name, code)
-    }
+/* assets */
+import { ReactComponent as PlusIcon } from '../../assets/icons/add.svg';
 
-    return (
-        <Modal active={active} setActive={setActive}>
-            <Typography
-                variant="h4"
-                component="span"
-                sx={{mb: '30px'}}
-            >
-                Добавить специальность
-            </Typography>
+const ModalCreate = observer(({ active, setActive }) => {
+  const { store, modal } = useContext(Context);
 
-            <TextField
-                id="outlined-basic"
-                label="Название предмета"
-                variant="outlined"
-                sx={{mb: '15px'}}
-                onChange={(e) => setName(e.target.value)}
-            />
-            <TextField
-                id="outlined-basic"
-                label="Код предмета"
-                variant="outlined"
-                sx={{mb: '30px'}}
-                onChange={(e) => setCode(e.target.value)}
-            />
+  const addSubject = () => {
+    const name = modal.name
+    const code = modal.code
+    store.subjects.addSubject(name, code);
+    modal.setActiveCreate(false);
+  };
 
-            <Button
-                variant="contained"
-                color="success"
-                onClick={() => addSpeciality()}
-                sx={{width: 'fit-content'}}
-            >
-                Добавить
-            </Button>
-        </Modal>
-    );
-};
+  return (
+    <Modal 
+      active={modal.isActiveCreate} 
+      setActive={modal.setActiveCreate} 
+      header={'Добавить предмет'}
+    >
+      <TextField
+        label="Предмет"
+        placeholder="Химия"
+        onChange={(e) => modal.setName(e.target.value)}
+      />
+      <TextField
+        label="ФГОС"
+        placeholder="52.02.01"
+        onChange={(e) => modal.setCode(e.target.value)}
+      />
+
+      <Button
+        onClick={addSubject}
+      >
+        Добавить
+        <PlusIcon/>
+      </Button>
+    </Modal>
+  );
+});
 
 export default ModalCreate;

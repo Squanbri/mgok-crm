@@ -1,46 +1,42 @@
-import EditIcon from "@mui/icons-material/Edit";
-import React, {useContext, useState} from 'react';
-import {TableCell, TableRow} from "@mui/material";
-import {observer} from "mobx-react-lite";
+import React, { useContext } from "react";
+import { observer } from "mobx-react-lite";
 
-import {Context} from "../../index";
+import { Context } from "../../index";
 import ModalUpdate from "./ModalUpdate";
 
-const Subject = observer(({subject}) => {
-    const {modal} = useContext(Context)
-    const [active, setActive] = useState(false)
+/* assets */
+import { ReactComponent as UpdateIcon } from '../../assets/icons/update.svg';
 
-    const showModal = (e) => {
-        e.stopPropagation()
+const Subject = observer(({ subject }) => {
+  const { modal } = useContext(Context);
 
-        setActive(true)
-        modal.setId(subject.id)
-        modal.setName(subject.name)
-        modal.setCode(subject.code)
-        modal.setActive(subject.active)
-    }
+  const showModal = (e) => {
+    e.stopPropagation();
 
-    return (
-        <>
-            {active &&
-                <ModalUpdate active={active} setActive={setActive}/>
-            }
+    modal.setId(subject.id);
+    modal.setName(subject.name);
+    modal.setCode(subject.code);
+    modal.setActive(subject.active);
+    modal.setActiveUpdate(true);
+  };
 
-            <TableRow
-                sx={{ '&:nth-of-type(even)': { backgroundColor: '#f7f8fc' } }}
-            >
-                <TableCell align="center">{subject.id}</TableCell>
-                <TableCell align="left">{subject.name}</TableCell>
-                <TableCell align="right">{subject.code}</TableCell>
-                <TableCell align="center">
-                    <EditIcon
-                        className="edit-icon"
-                        onClick={showModal}
-                    />
-                </TableCell>
-            </TableRow>
-        </>
-    );
+  return (
+    <>
+      <ModalUpdate />
+
+      <div className="table__row">
+        <div className="table__cell">{subject.id}</div>
+        <div className="table__cell">{subject.name}</div>
+        <div className="table__cell">{subject.code}</div>
+        <div className="table__cell">
+          <div onClick={(e) => showModal(e)}>
+            <UpdateIcon className="edit-icon" />
+            <span className="update-text">Изменить</span>
+          </div>
+        </div>
+      </div>
+    </>
+  );
 });
 
 export default Subject;

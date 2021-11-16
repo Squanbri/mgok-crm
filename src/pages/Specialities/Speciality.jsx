@@ -19,7 +19,6 @@ const Speciality = observer(({ spec }) => {
   };
 
   const changeSwitch = () => {
-
     const id = spec.id;
     const name = spec.name;
     const code = spec.code;

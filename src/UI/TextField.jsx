@@ -3,7 +3,7 @@ import _uniqueId from 'lodash/uniqueId';
 
 import '../styles/textfield.css';
 
-const TextField2 = ({label, placeholder, value, onChange, children}) => {
+const TextField = ({label, placeholder, value, onChange, children}) => {
   const [id] = useState(_uniqueId('TextField-'));
   const [focus, setFocus] = useState(false);
 
@@ -42,4 +42,4 @@ const TextField2 = ({label, placeholder, value, onChange, children}) => {
   )
 }
 
-export default TextField2;
+export default TextField;

@@ -1,18 +1,16 @@
 import React from 'react';
-import {TableCell, TableRow} from "@mui/material";
 
 const User = ({user}) => {
-
     return (
-        <TableRow
-            sx={{ '&:nth-of-type(even)': { backgroundColor: '#f7f8fc' } }}
-        >
-            <TableCell align="center">{user.id}</TableCell>
-            <TableCell align="left">{user.firstName}{user.lastName}</TableCell>
-            <TableCell align="center">{user.phone}</TableCell>
-            <TableCell align="center">{user.position}</TableCell>
-        </TableRow>
-    );
+        <>    
+          <div className="table__row">
+            <div className="table__cell">{user.id}</div>
+            <div className="table__cell">{user.firstName} {user.lastName}</div>
+            <div className="table__cell">{user.phone}</div>
+            <div className="table__cell">{user.position}</div>
+          </div>
+        </>
+      );
 };
 
 export default User;

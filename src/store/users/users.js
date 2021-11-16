@@ -1,48 +1,60 @@
-import {makeAutoObservable, observable, values} from "mobx";
+import { makeAutoObservable, observable, values } from "mobx";
 import UsersAPI from "../../API/UsersService";
 import User from "./user";
 
 class Users {
-    constructor() {
-        this.isLoading = true;
-        this.users = observable.map()
-        makeAutoObservable(this)
-    }
+  constructor() {
+    this.isLoading = true;
+    this.users = observable.map();
+    makeAutoObservable(this);
+  }
 
-    // SET
-    setUser(item) {
-        const user = new User(item)
-        this.users.set(item.id, user)
-    }
+  // SET
+  setUser(item) {
+    const user = new User(item);
+    this.users.set(item.id, user);
+  }
 
-    // GET
-    get list() {
-        return values(this.users)
-    }
+  setLoading(isLoading) {
+    this.isLoading = isLoading;
+  }
 
-    // FETCH ALL
-    async fetchUsers() {
-        const res = await UsersAPI.fetchUsers()
+  // GET
+  get list() {
+    return values(this.users);
+  }
 
-        res.data.forEach(item => {
-            this.setUser(item)
-        })
-    }
+  get isEmpty() {
+    return this.users.size === 0;
+  }
 
-    // FETCH ONE
-    async fetchUser(id) {
-        const res = await UsersAPI.fetchUser(id)
-        this.user = new Users(res.data)
-    }
+  // FETCH ALL
+  async fetchUsers() {
+    this.users.clear();
+    const res = await UsersAPI.fetchUsers();
 
-    // ADD
-    async addUser(firstName, lastName, position, phone, email, password) {
-        const response = await UsersAPI.postUser(firstName, lastName, position, phone, email, password)
-        if (response?.status.success) {
-            const item = response.data
-            this.setUser(item)
-        }
+    res?.users?.forEach((item) => {
+      this.setUser(item);
+    });
+
+    this.setLoading(false);
+  }
+
+  // ADD
+  async addUser(firstName, lastName, position, phone, email, password) {
+    const response = await UsersAPI.postUser(
+      firstName,
+      lastName,
+      position,
+      phone,
+      email,
+      password
+    );
+    if (response?.user) {
+      const item = response.user;
+      this.setUser(item);
     }
+  }
 }
 
-export default Users
+export default Users;

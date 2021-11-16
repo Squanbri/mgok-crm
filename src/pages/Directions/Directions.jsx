@@ -1,65 +1,49 @@
-import React, {useContext, useEffect, useState} from 'react';
-import {Paper, Table, TableBody, TableContainer} from "@mui/material";
-import {useParams} from "react-router-dom";
-import {observer} from "mobx-react-lite";
+import React, { useContext } from "react";
+import { useParams } from "react-router-dom";
+import { observer } from "mobx-react-lite";
 
-import {Context} from "../../index";
-import DirectionsHead from "./DirectionsHead";
+import { Context } from "../../index";
+import useFetch from "../../hooks/useFetch";
+import PageHead from "../../components/PageHead";
 import TableHeader from "./TableHeader";
 import ModalCreate from "./ModalCreate";
-import Direction from "./Direction";
-import Loader from "../../components/Loader";
-import Breadcrumbs from "./Breadcrumbs";
+import DirectionsList from "./DirectionsList";
+import Breadcrumbs from "../../components/Breadcrumbs";
 
 const Directions = observer(() => {
-    const {id} = useParams();
-    const {store} = useContext(Context)
-    const [active, setActive] = useState(false)
-    const speciality = store.specialities.speciality
-    const isLoading = store.directions.isLoading
+  const { id } = useParams();
+  const { store } = useContext(Context);
+  const speciality = store.specialities.speciality;
+  const name = speciality?.name || 'Квалификации'
 
-    useEffect(() => {
-        const fetchData = async () => {
-            await store.specialities.fetchSpeciality(id)
-            await store.directions.fetchDirections(id)
-        }
-        fetchData()
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [])
+  useFetch(async () => {
+    await store.specialities.fetchSpeciality(id);
+    await store.directions.fetchDirections(id);
+  })
 
-    if (isLoading) {
-        return (
-            <>
-                <Loader/>
-            </>
-        )
-    }
+  return (
+    <section>
+      <Breadcrumbs links={[
+        {name: 'Специальности', path: '/'},
+        {name: name, path: '/', active: true},
+      ]}/>
 
-    return (
-        <section>
-            <Breadcrumbs speciality={speciality}/>
+      <ModalCreate />
+      <PageHead>
+        <h3 className="text-header">{name}</h3>
+      </PageHead>
 
-            <DirectionsHead setActive={setActive} name={speciality?.name}/>
-            <ModalCreate active={active} setActive={setActive} />
+      <div className="table">
+        <div className="table__head">
+          <TableHeader />
+        </div>
+        <div className="table__body">
+          <DirectionsList />
+        </div>
+      </div>
 
-            <div className="speciality-body">
-                <TableContainer
-                    className="speciality-table"
-                    component={Paper}
-                    sx={{boxShadow: 0}}
-                >
-                    <Table>
-                        <TableHeader/>
-                        <TableBody>
-                            {store.directions.list.map(direction => (
-                                <Direction direction={direction}  key={direction.id} />
-                            ))}
-                        </TableBody>
-                    </Table>
-                </TableContainer>
-            </div>
-        </section>
-    );
+    </section>
+  );
 });
 
 export default Directions;

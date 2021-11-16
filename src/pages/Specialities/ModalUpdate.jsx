@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import { observer } from "mobx-react-lite";
 
 import { Context } from "../../index";
-import Modal from "../../components/Modal";
+import Modal from "../../UI/Modal";
 import TextField from "../../UI/TextField";
 import Button from "../../UI/Button";
 
@@ -21,8 +21,6 @@ const ModalUpdate = observer(() => {
     store.specialities.updateSpeciality(id, name, code, active);
     modal.setActiveUpdate(false);
   };
-
-  if (!modal.isActiveUpdate) return null;
 
   return (
     <Modal

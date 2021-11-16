@@ -1,8 +1,8 @@
 import React, {useContext} from 'react';
 import {NavLink} from "react-router-dom";
 import {Context} from "../index";
-import {Button} from "@mui/material";
 
+import Button from "../UI/Button";
 import "../styles/sidebar.css";
 
 const SideBar = () => {
@@ -26,18 +26,14 @@ const SideBar = () => {
                 </li>
             </ul>
 
-            <Button
-                variant="contained"
-                className="btn-exit"
-                color="error"
-                style={{
-                    display: 'flex',
-                    margin: 'auto'
-                }}
-                onClick={() =>auth.logout()}
-            >
-                Выйти
-            </Button>
+            <div className="sidebar__exit">
+                <Button
+                    className="btn-exit"
+                    onClick={auth.logout}
+                >
+                    Выйти
+                </Button>
+            </div>
         </nav>
     );
 };

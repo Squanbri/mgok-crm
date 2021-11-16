@@ -7,7 +7,7 @@ import ModalCreate from "./ModalCreate";
 import PageHead from "../../components/PageHead";
 import TableHeader from "./TableHeader";
 import SpecialitiesList from "./SpecialitiesList";
-import TextField2 from "../../UI/TextField";
+import TextField from "../../UI/TextField";
 import { ReactComponent as SearchIcon } from '../../assets/icons/search.svg';
 import "../../styles/table.css";
 import "../../styles/specialitiesTable.css";
@@ -29,15 +29,15 @@ const Specialities = observer(() => {
 
   return (
     <section>
-      <ModalCreate />
+      <ModalCreate/>
       <PageHead>
         <h3 className="text-header">Специальность</h3>
-        <TextField2 
+        <TextField 
           label="Наименование"
           placeholder="Поиск специальности"
         >
           <SearchIcon/>
-        </TextField2>
+        </TextField>
       </PageHead>
 
       <div className="table">

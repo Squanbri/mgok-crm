@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import { observer } from "mobx-react-lite";
 
 import { Context } from "../../index";
-import Modal from "../../components/Modal";
+import Modal from "../../UI/Modal";
 import TextField from "../../UI/TextField";
 import Button from "../../UI/Button";
 
@@ -18,8 +18,6 @@ const ModalCreate = observer(() => {
     store.specialities.addSpeciality(name, code);
     modal.setActiveCreate(false);
   };
-
-  if (!modal.isActiveCreate) return null;
 
   return (
     <Modal 

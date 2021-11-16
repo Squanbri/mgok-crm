@@ -16,6 +16,7 @@ export default class DirectionsService {
         `${process.env.REACT_APP_BACKEND_URL}/api/admin/specialities/${id}/directions`,
         config
       );
+
       return response.data;
     } catch (e) {
       this.setErrors(e.response);

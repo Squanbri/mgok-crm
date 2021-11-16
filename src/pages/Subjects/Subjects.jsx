@@ -1,62 +1,40 @@
-import React, {useContext, useEffect, useState} from 'react';
-import {Paper, Table, TableBody, TableContainer} from "@mui/material";
-import {observer} from "mobx-react-lite";
+import React, { useContext } from "react";
+import { observer } from "mobx-react-lite";
 
-import {Context} from "../../index";
-import Loader from "../../components/Loader";
-import ModalCreate from "../Subjects/ModalCreate";
+import { Context } from "../../index";
+import useFetch from "../../hooks/useFetch";
+import ModalCreate from "./ModalCreate";
+import PageHead from "../../components/PageHead";
 import TableHeader from "./TableHeader";
-import Subject from "./Subject";
-import SubjectsHead from "./SubjectsHead";
-import "../../styles/subjects.css";
+import SubjectsList from "./SubjectsList";
+import "../../styles/table.css";
+import "../../styles/specialitiesTable.css";
 
 const Subjects = observer(() => {
     const {store} = useContext(Context)
-    const [active, setActive] = useState(false)
     const subjects = store.subjects
-    const isLoading = store.subjects.isLoading
 
-    useEffect(() => {
-        const fetchData = async () => {
-            await subjects.fetchSubjects()
-            store.subjects.isLoading = false
-        }
-        fetchData()
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [])
-
-    if (isLoading) {
-        return (
-            <>
-                <Loader/>
-            </>
-        )
-    }
+    useFetch(async () => {
+    await subjects.fetchSubjects()
+    })
 
     return (
         <section>
-            <SubjectsHead setActive={setActive}/>
-            <ModalCreate active={active} setActive={setActive} />
-
-            <div className="speciality-body">
-                <TableContainer
-                    className="speciality-table"
-                    component={Paper}
-                    sx={{boxShadow: 0}}
-                >
-                    <Table>
-                        <TableHeader/>
-
-                        <TableBody>
-                            {subjects.list.map(subject => (
-                                <Subject subject={subject}  key={subject.id} />
-                            ))}
-                        </TableBody>
-                    </Table>
-                </TableContainer>
+          <ModalCreate/>
+          <PageHead>
+            <h3 className="text-header">Предметы</h3>
+          </PageHead>
+    
+          <div className="table">
+            <div className="table__head">
+              <TableHeader />
             </div>
+            <div className="table__body">
+              <SubjectsList/>
+            </div>
+          </div>
         </section>
-    );
+      );
 });
 
 export default Subjects;

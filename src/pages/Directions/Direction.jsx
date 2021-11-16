@@ -1,76 +1,70 @@
-import React, {useContext, useState} from 'react';
-import {Switch, TableCell, TableRow} from "@mui/material";
-import EditIcon from "@mui/icons-material/Edit";
-import DeleteIcon from "@mui/icons-material/Delete";
-import {observer} from "mobx-react-lite";
-import {Context} from "../../index";
+import React, { useContext } from "react";
+import { observer } from "mobx-react-lite";
+
+import { Context } from "../../index";
 import ModalUpdate from "./ModalUpdate";
+import Switch from "../../UI/Switch";
 
-const Direction = observer(({direction}) => {
-    const {store, modal} = useContext(Context)
-    const [active, setActive] = useState(false)
+/* assets */
+import { ReactComponent as UpdateIcon } from '../../assets/icons/update.svg';
+import { ReactComponent as DeleteIcon } from '../../assets/icons/delete.svg';
 
-    const changeSwitch = (e) => {
-        e.stopPropagation()
+const Direction = observer(({ direction }) => {
+  const { store, modal } = useContext(Context);
 
-        const id = direction.id
-        const name = direction.name
-        const code = direction.code
-        const active = !direction.active
-        store.directions.updateDirection(id, name, code, active)
-    }
+  const changeSwitch = () => {
+    const id = direction.id;
+    const name = direction.name;
+    const code = direction.code;
+    const active = !direction.active;
+    store.directions.updateDirection(id, name, code, active);
+  };
 
-    const showModal = (e) => {
-        e.stopPropagation()
+  const showModal = (e) => {
+    e.stopPropagation();
 
-        setActive(true)
-        modal.setId(direction.id)
-        modal.setName(direction.name)
-        modal.setCode(direction.code)
-        modal.setActive(direction.active)
-    }
+    modal.setId(direction.id);
+    modal.setName(direction.name);
+    modal.setCode(direction.code);
+    modal.setActive(direction.active);
+    modal.setActiveUpdate(true);
+  };
 
-    const deleteDirection = (e) => {
-        e.stopPropagation()
+  const deleteDirection = (e) => {
+    e.stopPropagation();
 
-        store.directions.deleteDirection(direction.id)
-    }
+    store.directions.deleteDirection(direction.id);
+  };
 
-    return (
-        <>
-            {active &&
-                <ModalUpdate active={active} setActive={setActive}/>
-            }
+  return (
+    <>
+      <ModalUpdate/>
 
-            <TableRow
-                sx={{ '&:nth-of-type(even)': { backgroundColor: '#f7f8fc' } }}
-            >
-                <TableCell align="center">{direction.id}</TableCell>
-                <TableCell align="left">{direction.name}</TableCell>
-                <TableCell align="right">{direction.code}</TableCell>
-                <TableCell align="center">
-                    <Switch
-                        checked={!!direction.active}
-                        onClick={changeSwitch}
-                        color="secondary"
-                    />
-                </TableCell>
-                <TableCell align="center">
-                    <EditIcon
-                        onClick={showModal}
-                        className="edit-icon"
-                    />
-                </TableCell>
-                <TableCell align="center">
-                    <DeleteIcon
-                        color="error"
-                        className="delete-icon"
-                        onClick={deleteDirection}
-                    />
-                </TableCell>
-            </TableRow>
-        </>
-    );
+      <div className="table__row">
+        <div className="table__cell">{direction.id}</div>
+        <div className="table__cell">{direction.name}</div>
+        <div className="table__cell">{direction.code}</div>
+        <div className="table__cell" >
+          <Switch
+            checked={!!direction.active}
+            onChange={changeSwitch}
+          />
+        </div>
+        <div className="table__cell">
+          <div onClick={e => showModal(e)}>
+            <UpdateIcon className="edit-icon" />
+            <span className="update-text">Изменить</span>
+          </div>
+        </div>
+        <div className="table__cell">
+          <div onClick={e => deleteDirection(e)}>
+            <DeleteIcon className="delete-icon"/>
+            <span className="delete-text">Удалить</span>
+          </div>
+        </div>
+      </div>
+    </>
+  );
 });
 
 export default Direction;
