@@ -1,10 +1,11 @@
-import { makeAutoObservable, observable, values } from "mobx";
+import { makeAutoObservable, observable, runInAction, values } from "mobx";
 import DirectionsAPI from "../../API/DirectionsService";
 import Direction from "./direction";
 
 class Directions {
   constructor() {
     this.isLoading = true;
+    this.direction = null;
     this.directions = observable.map();
     makeAutoObservable(this);
   }
@@ -40,10 +41,19 @@ class Directions {
     const res = await DirectionsAPI.fetchDirections(id);
 
     res?.directions?.forEach((item) => {
-    this.setDirection(item);
+      this.setDirection(item);
     });
     
     this.setLoading(false);
+  }
+
+  // FETCH ONE
+  async fetchDirection(id) {
+    const res = await DirectionsAPI.fetchDirection(id);
+    const direction = res?.direction
+    runInAction(() => {
+        this.direction = direction
+    })
   }
 
   // ADD

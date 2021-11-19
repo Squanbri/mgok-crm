@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import _uniqueId from 'lodash/uniqueId';
 
-import '../styles/textfield.css';
+import '../styles/textarea.css';
 
-const TextField = ({label, placeholder, value, onChange, children}) => {
-  const [id] = useState(_uniqueId('TextField-'));
+const TextArea = ({label, placeholder, value, onChange, children}) => {
+  const [id] = useState(_uniqueId('TextArea-'));
   const [focus, setFocus] = useState(false);
 
   const onChangeEvent = (e) => {
@@ -14,20 +14,20 @@ const TextField = ({label, placeholder, value, onChange, children}) => {
   }
 
   return (
-    <div className="input__wrapper">
+    <div className="textarea__wrapper">
       {label &&
         <label 
           htmlFor="id"
-          className="input__label"
+          className="textarea__label"
         >
           {label}
        </label>
       }
 
-      <input 
+      <textarea 
         type="text" 
         id={id}
-        className="input__block" 
+        className="textarea__block" 
         placeholder={placeholder}
         value={value}
         onFocus={() => setFocus(true)}
@@ -36,7 +36,7 @@ const TextField = ({label, placeholder, value, onChange, children}) => {
       /> 
 
       {!focus &&
-        <div className="input__icon">
+        <div className="textarea__icon">
           {children}
         </div>
       }
@@ -44,4 +44,4 @@ const TextField = ({label, placeholder, value, onChange, children}) => {
   )
 }
 
-export default TextField;
+export default TextArea;

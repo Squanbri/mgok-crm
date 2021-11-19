@@ -12,13 +12,13 @@ import { ReactComponent as PlusIcon } from '../../assets/icons/add.svg';
 const ModalCreate = observer(({id}) => {
   const { store, modal } = useContext(Context);
 
-  const addDirection = () => {
-    const specialityId = id
+  const addProfessional = () => {
+    const groupId = id
     const name = modal.name
-    const code = modal.code
-    store.directions.addDirection(name, code, specialityId)
+    const hours = modal.hours
+    store.professionals.addProfessional(name, hours, groupId);
     modal.setActiveCreate(false);
-  }
+  };
 
   if (!modal.isActiveCreate) return null;
 
@@ -26,21 +26,22 @@ const ModalCreate = observer(({id}) => {
     <Modal 
       active={modal.isActiveCreate} 
       setActive={modal.setActiveCreate} 
-      header={'Добавить направление'}
+      header={'Добавить профессиональное качество'}
     >
       <TextField
-        label="Направление"
-        placeholder="Мастер слесарных работ"
+        label="Качество"
+        placeholder="Например: Система допусков и посадок"
         onChange={(e) => modal.setName(e.target.value)}
       />
+
       <TextField
-        label="ФГОС"
-        placeholder="52.02.01"
-        onChange={(e) => modal.setCode(e.target.value)}
+        label="Количество часов"
+        placeholder="Например: 36 ч."
+        onChange={(e) => modal.setHours(e.target.value)}
       />
 
       <Button
-        onClick={addDirection}
+        onClick={addProfessional}
       >
         Добавить
         <PlusIcon/>

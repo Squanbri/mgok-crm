@@ -1,17 +1,21 @@
-import {makeAutoObservable} from "mobx";
+import { makeAutoObservable } from "mobx";
 import Specialities from "./specialities/specialities";
 import Directions from "./directions/directions";
 import Subjects from "./subjects/subjects";
+import Groups from "./groups/groups";
 import Users from "./users/users";
+import Professionals from "./porfessionalQualities/proffesionals";
 
 class Store {
-    constructor() {
-        this.specialities = new Specialities()
-        this.directions = new Directions()
-        this.subjects = new Subjects()
-        this.users = new Users()
-        makeAutoObservable(this)
-    }
+  constructor() {
+    this.professionals = new Professionals();
+    this.specialities = new Specialities();
+    this.directions = new Directions();
+    this.subjects = new Subjects();
+    this.groups = new Groups();
+    this.users = new Users();
+    makeAutoObservable(this);
+  }
 }
 
 export default Store;

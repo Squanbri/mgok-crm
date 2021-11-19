@@ -1,4 +1,5 @@
 import React, { useContext } from "react";
+import { useHistory } from "react-router-dom";
 import { observer } from "mobx-react-lite";
 
 import { Context } from "../../index";
@@ -11,6 +12,11 @@ import { ReactComponent as DeleteIcon } from '../../assets/icons/delete.svg';
 
 const Direction = observer(({ direction }) => {
   const { store, modal } = useContext(Context);
+  const history = useHistory();
+
+  const linkTo = () => {
+    history.push(`/speciality/${store.specialities.speciality.id}/direction/${direction.id}`);
+  };
 
   const changeSwitch = () => {
     const id = direction.id;
@@ -40,7 +46,7 @@ const Direction = observer(({ direction }) => {
     <>
       <ModalUpdate/>
 
-      <div className="table__row">
+      <div className="table__row" onClick={linkTo}>
         <div className="table__cell">{direction.id}</div>
         <div className="table__cell">{direction.name}</div>
         <div className="table__cell">{direction.code}</div>

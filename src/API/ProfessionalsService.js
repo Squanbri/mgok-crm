@@ -1,8 +1,8 @@
 import axios from "axios";
 import Errors from "../store/errors";
 
-export default class DirectionsService {
-  static async fetchDirections(id) {
+export default class ProfessionalsService {
+  static async fetchProfessionals(id) {
     const token = localStorage.getItem("token");
 
     const config = {
@@ -13,7 +13,7 @@ export default class DirectionsService {
 
     try {
       const response = await axios.get(
-        `${process.env.REACT_APP_BACKEND_URL}/api/admin/specialities/${id}/directions`,
+        `${process.env.REACT_APP_BACKEND_URL}/api/admin/professional_qualities_groups/${id}/professional_qualities`,
         config
       );
 
@@ -23,7 +23,7 @@ export default class DirectionsService {
     }
   }
 
-  static async fetchDirection(id) {
+  static async fetchProfessional(id) {
     const token = localStorage.getItem("token");
 
     const config = {
@@ -34,7 +34,7 @@ export default class DirectionsService {
   
     try {
       const response = await axios.get(
-        `${process.env.REACT_APP_BACKEND_URL}/api/admin/directions/${id}`,
+        `${process.env.REACT_APP_BACKEND_URL}/api/admin/groups/${id}`,
         config
       );
       return response.data;
@@ -43,13 +43,12 @@ export default class DirectionsService {
     }
   }
 
-  static async postDirection(name, code, specialityId) {
+  static async postProfessional(name, hours, groupId) {
     const token = localStorage.getItem("token");
 
     const data = {
       name,
-      fgos_code: code,
-      is_active: false,
+      number_of_hours: hours
     };
 
     const config = {
@@ -60,7 +59,7 @@ export default class DirectionsService {
 
     try {
       const response = await axios.post(
-        `${process.env.REACT_APP_BACKEND_URL}/api/admin/specialities/${specialityId}/directions`,
+        `${process.env.REACT_APP_BACKEND_URL}/api/admin/professional_qualities_groups/${groupId}/professional_qualities`,
         data,
         config
       );
@@ -70,13 +69,12 @@ export default class DirectionsService {
     }
   }
 
-  static async updateDirection(id, name, code, active) {
+  static async updateProfessional(name, active, directionId) {
     const token = localStorage.getItem("token");
 
     const data = {
       name,
-      fgos_code: code,
-      is_active: active,
+      is_active: active
     };
 
     const config = {
@@ -87,7 +85,7 @@ export default class DirectionsService {
 
     try {
       const response = await axios.put(
-        `${process.env.REACT_APP_BACKEND_URL}/api/admin/directions/${id}`,
+        `${process.env.REACT_APP_BACKEND_URL}/api/admin/professional_qualities_groups/${directionId}`,
         data,
         config
       );
@@ -95,21 +93,6 @@ export default class DirectionsService {
     } catch (e) {
       this.setErrors(e.response);
     }
-  }
-
-  static async deleteSpeciality(id) {
-    const token = localStorage.getItem("token");
-
-    const config = {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    };
-    const response = await axios.delete(
-      `${process.env.REACT_APP_BACKEND_URL}/api/admin/directions/${id}`,
-      config
-    );
-    return response.data;
   }
 
   static setErrors(response) {

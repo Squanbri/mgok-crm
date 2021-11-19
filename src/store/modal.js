@@ -15,6 +15,9 @@ class Modal {
     this.email = '';
     this.password = '';
 
+    // qualities
+    this.hours = '';
+
     this.isActiveUpdate = false;
     this.isActiveCreate = false;
     makeAutoObservable(this);
@@ -59,6 +62,11 @@ class Modal {
 
   setPassword(password) {
     this.password = password
+  }
+
+  // qualities
+  setHours(hours) {
+    this.hours = hours
   }
 
   // modals

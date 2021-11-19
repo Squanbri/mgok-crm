@@ -7,28 +7,30 @@ import useFetch from "../../hooks/useFetch";
 import PageHead from "../../components/PageHead";
 import TableHeader from "./TableHeader";
 import ModalCreate from "./ModalCreate";
-import DirectionsList from "./DirectionsList";
+import GroupsList from "./GroupsList";
 import Breadcrumbs from "../../components/Breadcrumbs";
 
-const Directions = observer(() => {
-  const { id } = useParams();
+const Groups = observer(() => {
+  const { specId, dirId } = useParams();
   const { store } = useContext(Context);
   const speciality = store.specialities.speciality;
-  const name = speciality?.name || 'Квалификации'
+  const direction = store.directions.direction;
+  const name = direction?.name || 'Профессиональные группы'
 
   useFetch(async () => {
-    await store.specialities.fetchSpeciality(id);
-    await store.directions.fetchDirections(id);
+    await store.specialities.fetchSpeciality(specId);
+    await store.directions.fetchDirection(dirId);
+    await store.groups.fetchGroups(dirId);
   })
 
   return (
     <section>
       <Breadcrumbs links={[
         {name: 'Специальности', path: '/'},
+        {name: speciality?.name, path: `/speciality/${speciality?.id}`},
         {name: name, path: '/', active: true},
       ]}/>
-
-      <ModalCreate id={id}/>
+      <ModalCreate id={dirId}/>
       <PageHead>
         <h3 className="text-header">{name}</h3>
       </PageHead>
@@ -38,7 +40,7 @@ const Directions = observer(() => {
           <TableHeader />
         </div>
         <div className="table__body">
-          <DirectionsList />
+          <GroupsList />
         </div>
       </div>
 
@@ -46,4 +48,4 @@ const Directions = observer(() => {
   );
 });
 
-export default Directions;
+export default Groups;

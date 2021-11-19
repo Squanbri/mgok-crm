@@ -3,7 +3,7 @@ import { observer } from "mobx-react-lite";
 
 import { Context } from "../../index";
 import Modal from "../../UI/Modal";
-import TextField from "../../UI/TextField";
+import TextArea from "../../UI/TextArea";
 import Button from "../../UI/Button";
 
 /* assets */
@@ -12,13 +12,12 @@ import { ReactComponent as PlusIcon } from '../../assets/icons/add.svg';
 const ModalCreate = observer(({id}) => {
   const { store, modal } = useContext(Context);
 
-  const addDirection = () => {
-    const specialityId = id
+  const addGroup = () => {
+    const directionId = id
     const name = modal.name
-    const code = modal.code
-    store.directions.addDirection(name, code, specialityId)
+    store.groups.addGroup(name, directionId);
     modal.setActiveCreate(false);
-  }
+  };
 
   if (!modal.isActiveCreate) return null;
 
@@ -26,21 +25,15 @@ const ModalCreate = observer(({id}) => {
     <Modal 
       active={modal.isActiveCreate} 
       setActive={modal.setActiveCreate} 
-      header={'Добавить направление'}
+      header={'Добавить наименование профессиональной группы'}
     >
-      <TextField
-        label="Направление"
-        placeholder="Мастер слесарных работ"
+      <TextArea
+        placeholder="Изготовление деталей средней сложности типа тел вращения с точностью размеров до 10, 11 квалитета на токарно-карусельных станках с диаметром планшайбы до 4000 мм..."
         onChange={(e) => modal.setName(e.target.value)}
-      />
-      <TextField
-        label="ФГОС"
-        placeholder="52.02.01"
-        onChange={(e) => modal.setCode(e.target.value)}
       />
 
       <Button
-        onClick={addDirection}
+        onClick={addGroup}
       >
         Добавить
         <PlusIcon/>

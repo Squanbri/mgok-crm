@@ -4,8 +4,29 @@
   height: 62px;
   background-color: #597E9D;
   z-index: 1000;
+  display: flex;
+  align-items: center;
 }
 
 .header__logo {
   margin: 15px 128px 15px 68px;
+}
+
+.header__menu {
+  list-style: none;
+  display: flex;
+  gap: 40px;
+}
+
+.header-link {
+  text-decoration: none;
+  color: #fff !important;
+}
+
+.header__profile-menu {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  margin-left: auto;
+  margin-right: 60px;
 }

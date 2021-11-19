@@ -15,7 +15,7 @@ const Speciality = observer(({ spec }) => {
   const history = useHistory();
 
   const linkTo = () => {
-    history.push(`/directions/${spec.id}`);
+    history.push(`/speciality/${spec.id}`);
   };
 
   const changeSwitch = () => {
