@@ -37,7 +37,7 @@ const Header = () => {
       </ul>
 
       <ul className="header__profile-menu">
-        <Link  to="/favourites" className="header-link"> <FavoritesSvg/> </Link>
+        <Link to="/favourites" className="header-link"> <FavoritesSvg/> </Link>
         <Link to="/notifications" className="header-link"> <NotificationsSvg/> </Link>
         <Link to="/chat" className="header-link"> <ChatSvg/> </Link>
         <Link to="/profile" className="header-link"> <ProfileSvg/> </Link>
