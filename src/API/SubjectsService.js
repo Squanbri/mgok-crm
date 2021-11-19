@@ -13,7 +13,7 @@ export default class subjectsService {
 
     try {
       const response = await axios.get(
-        `${process.env.REACT_APP_BACKEND_URL}/api/subjects`
+        `${process.env.REACT_APP_BACKEND_URL}/api/admin/subjects`
       );
       return response.data;
     } catch(e) {

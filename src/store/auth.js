@@ -24,8 +24,8 @@ class Auth {
 
     async login(email, password) {
         const res = await AuthService.login(email, password)
-        if (res?.data !== undefined) {
-            localStorage.setItem('token', res.data)
+        if (res?.token !== undefined) {
+            localStorage.setItem('token', res.token)
             this.setAuth(true)
         }
     }
