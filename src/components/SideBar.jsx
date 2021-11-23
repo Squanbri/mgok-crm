@@ -29,7 +29,7 @@ const SideBar = () => {
             <div className="sidebar__exit">
                 <Button
                     className="btn-exit"
-                    onClick={auth.logout}
+                    onClick={() => auth.logout()}
                 >
                     Выйти
                 </Button>

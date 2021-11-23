@@ -28,8 +28,8 @@ export default class AuthService {
         }
 
         const errors = data?.data
-        
-        if (errors === undefined) {
+
+        if (errors === undefined || errors.length === 0) {
             Errors.setError('Неправильный логин или пароль')
         } else {
             Errors.setErrors(errors, collection)

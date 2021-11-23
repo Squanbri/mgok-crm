@@ -9,6 +9,7 @@ import Header from "./components/Header";
 import SideBar from "./components/SideBar";
 import Routes from "./components/Routes";
 import './styles/app.css';
+import Footer from "./components/Footer";
 
 const App = observer(() => {
 
@@ -32,6 +33,7 @@ const App = observer(() => {
                 <Header/>
                 <SideBar/>
                 <Routes/>
+                <Footer/>
             </BrowserRouter>
         </>
   );

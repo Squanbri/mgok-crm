@@ -1,20 +1,22 @@
 import axios from "axios";
 import Errors from "../store/errors";
 
-export default class subjectsService {
+export default class SubjectsService {
   static async fetchSubjects() {
-    const token = localStorage.getItem("token");
-
-    const config = {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    };
-
     try {
+      const token = localStorage.getItem("token");
+
+      const config = {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      };
+
       const response = await axios.get(
-        `${process.env.REACT_APP_BACKEND_URL}/api/admin/subjects`
+        `${process.env.REACT_APP_BACKEND_URL}/api/admin/subjects`,
+        config
       );
+
       return response.data;
     } catch(e) {
       this.setErrors(e.response); 
@@ -95,7 +97,7 @@ export default class subjectsService {
       name: "название предмета",
       "fgos code": "код предмета",
     };
-
+    console.log(errors)
     Errors.setErrors(errors, collection);
   }
 }
