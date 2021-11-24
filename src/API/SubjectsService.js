@@ -61,7 +61,7 @@ export default class SubjectsService {
       );
       return response.data;
     } catch (e) {
-      this.setErrors(e.response.data.data);
+      this.setErrors(e.response);
     }
   }
 
@@ -88,14 +88,14 @@ export default class SubjectsService {
       );
       return response.data;
     } catch (e) {
-      this.setErrors(e.response.data.data);
+      this.setErrors(e.response);
     }
   }
 
   static setErrors(errors) {
     const collection = {
       name: "название предмета",
-      "fgos code": "код предмета",
+      code: "код предмета",
     };
     console.log(errors)
     Errors.setErrors(errors, collection);

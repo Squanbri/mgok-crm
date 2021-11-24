@@ -8,21 +8,20 @@ import "../styles/errors.css";
 
 const Errors = observer(() => {
     const { errors } = useContext(Context)
+    const { isLength, list } = errors
 
     return (
         <div>
-            {errors.isLength &&
+            {isLength &&
                 <TransitionGroup  className="errors-container">
-                    {errors.errors.map(error =>
-                        <Collapse key={error}>
+                    {list.map(error => 
+                        <Collapse key={error.id}>
                             <Alert
                                 className="error"
                                 severity="error"
-                                onClose={() => {
-                                    errors.errors.remove(error)
-                                }}
+                                onClose={() => errors.deleteError(error.id)}
                             >
-                                {error}
+                                {error.title}
                             </Alert>
                         </Collapse>
                     )}

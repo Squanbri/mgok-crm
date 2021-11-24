@@ -22,17 +22,17 @@ export default class AuthService {
         return response.data
     }
 
-    static setErrors(data) {
+    static setErrors(response) {
         const collection = {
             password: 'пароль',
         }
 
-        const errors = data?.data
+        const errors = response?.data?.errors
 
         if (errors === undefined || errors.length === 0) {
             Errors.setError('Неправильный логин или пароль')
         } else {
-            Errors.setErrors(errors, collection)
+            Errors.setErrors(response, collection)
         }
     }
 }
