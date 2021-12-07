@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { observer } from "mobx-react-lite";
 
 import { Context } from "../../index";
@@ -11,10 +11,10 @@ import { ReactComponent as UpdateIcon } from '../../assets/icons/update.svg';
 
 const Direction = observer(({ group }) => {
   const { store, modal } = useContext(Context);
-  const history = useHistory();
+  const navigate = useNavigate();
 
   const linkTo = () => {
-    history.push(`/speciality/${store.specialities.speciality.id}/direction/${store.directions.direction.id}/group/${group.id}`);
+    navigate(`/speciality/${store.specialities.speciality.id}/direction/${store.directions.direction.id}/group/${group.id}`);
   };
 
   const changeSwitch = () => {

@@ -5,9 +5,11 @@ import Subjects from "./subjects/subjects";
 import Groups from "./groups/groups";
 import Users from "./users/users";
 import Professionals from "./porfessionalQualities/proffesionals";
+import ProfessionalSubjects from "./professionalSubjects/professionalSubjects";
 
 class Store {
   constructor() {
+    this.professionalSubjects = new ProfessionalSubjects();
     this.professionals = new Professionals();
     this.specialities = new Specialities();
     this.directions = new Directions();

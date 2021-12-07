@@ -5,7 +5,7 @@ import {ReactComponent as PlusIcon} from '../assets/icons/add.svg';
 import Button from '../UI/Button';
 import '../styles/pageheader.css';
 
-const PageHead = ({children}) => {
+const PageHead = ({setModalActive, children}) => {
   const {modal} = useContext(Context)
 
   return (
@@ -16,7 +16,7 @@ const PageHead = ({children}) => {
 
       <div className="header-button__add">
         <Button
-          onClick={() => modal.setActiveCreate(true)}
+          onClick={() => setModalActive(true)}
         >
       
       

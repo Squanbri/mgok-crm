@@ -17,7 +17,8 @@ class Auth {
         return this._isAuth
     }
 
-    check() { // called once from app.js
+    // called once from app.js
+    check() { 
         const token = localStorage.getItem('token')
         if (token !== null) this.setAuth(true)
     }

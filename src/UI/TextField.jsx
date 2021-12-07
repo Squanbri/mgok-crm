@@ -1,10 +1,8 @@
 import React, { useState } from 'react';
-import _uniqueId from 'lodash/uniqueId';
 
 import '../styles/textfield.css';
 
-const TextField = ({label, placeholder, value, onChange, children}) => {
-  const [id] = useState(_uniqueId('TextField-'));
+const TextField = ({id, name, label, placeholder, value, onChange, children}) => {
   const [focus, setFocus] = useState(false);
 
   const onChangeEvent = (e) => {
@@ -27,6 +25,7 @@ const TextField = ({label, placeholder, value, onChange, children}) => {
       <input 
         type="text" 
         id={id}
+        name={name}
         className="input__block" 
         placeholder={placeholder}
         value={value}

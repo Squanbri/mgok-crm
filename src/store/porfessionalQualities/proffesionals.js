@@ -50,9 +50,9 @@ class Professionals {
   // FETCH ONE
   async fetchProfessional(id) {
     const res = await ProfessionalsAPI.fetchProfessional(id);
-    const professional = res?.professional_qualities_professional
+    const professional = res?.professional_quality
     runInAction(() => {
-        this.professional = professional
+      this.professional = professional
     })
   }
 

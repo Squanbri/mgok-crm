@@ -24,7 +24,7 @@ class Errors {
 
   static setErrors(response, collection) {
     const errors = this.pullErrors(response, collection);
-
+    
     if (errors) {
       for (const errorField in errors) {
         const errorsByField = errors[errorField] // Все ошибки поля
@@ -61,15 +61,15 @@ class Errors {
   // Замена название поля из бд, на название для пользователей
   // Пример: (Поле name обязательно -> Поле название обязательно)
   static replaceNameFields(errors, collection) {
-
+    
     for (const errorField in errors) {
       const errorsByField = errors[errorField] // Все ошибки поля
       
       for (const [index, error] of errorsByField.entries()) { 
-        const replacement = collection[errorField];
+        const replacement = collection[errorField.replace('_', ' ')];
 
         if (replacement !== undefined) {
-          const newError = error.replace(errorField, replacement)
+          const newError = error.replace(errorField.replace('_', ' '), replacement)
           errors[errorField][index] = newError
         }
       }

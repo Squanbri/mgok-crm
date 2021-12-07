@@ -13,7 +13,7 @@ const SideBar = () => {
 
             <ul className="nav-links">
                 <li className="nav-links__item">
-                    <NavLink exact to="/" className="nav-link">Специальности</NavLink>
+                    <NavLink to="/" className="nav-link">Специальности</NavLink>
                 </li>
                 <li className="nav-links__item">
                     <NavLink  to="/applications" className="nav-link">Заявки</NavLink>

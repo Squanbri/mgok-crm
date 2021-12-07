@@ -15,22 +15,22 @@ const Header = () => {
 
       <ul className="header__menu">
         <li className="header-links__item">
-          <Link exact to="/education" className="header-link">
+          <Link to="/education" className="header-link">
             Обучение
           </Link>
         </li>
         <li className="header-links__item">
-          <Link exact to="/vacancies" className="header-link">
+          <Link to="/vacancies" className="header-link">
             Вакансии
           </Link>
         </li>
         <li className="header-links__item">
-          <Link exact to="/resume" className="header-link">
+          <Link to="/resume" className="header-link">
             Резюме
           </Link>
         </li>
         <li className="header-links__item">
-          <Link exact to="/about" className="header-link">
+          <Link to="/about" className="header-link">
             О нас
           </Link>
         </li>

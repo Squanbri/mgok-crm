@@ -18,6 +18,16 @@ class Modal {
     // qualities
     this.hours = '';
 
+    // professionalSubjects
+    this.independentWorkHours = ''
+    this.theoreticalLearningHours = ''
+    this.laboratoryWorkHours = ''
+    this.courseWorksHours = ''
+    this.minimalHours = ''
+    this.practiceHours = ''
+    this.certificationHours = ''
+    this.certificationType = ''
+
     this.isActiveUpdate = false;
     this.isActiveCreate = false;
     makeAutoObservable(this);
@@ -67,6 +77,39 @@ class Modal {
   // qualities
   setHours(hours) {
     this.hours = hours
+  }
+
+  // profSubjects
+  setIndependentWorkHours(hours) {
+    this.independentWorkHours = hours
+  }
+
+  setTheoreticalLearningHours(hours) {
+    this.theoreticalLearningHours = hours
+  }
+
+  setLaboratoryWorkHours(hours) {
+    this.laboratoryWorkHours = hours
+  }
+
+  setCourseWorksHours(hours) {
+    this.courseWorksHours = hours
+  }
+
+  setMinimalHours(hours) {
+    this.minimalHours = hours
+  }
+
+  setPracticeHours(hours) {
+    this.practiceHours = hours
+  }
+
+  setCertificationHours(hours) {
+    this.certificationHours = hours
+  }
+
+  setCertificationType(type) {
+    this.certificationType = type
   }
 
   // modals

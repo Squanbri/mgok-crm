@@ -1,5 +1,6 @@
 import React, { useContext } from "react";
 import { observer } from "mobx-react-lite";
+import { useFormik } from "formik";
 
 import { Context } from "../../index";
 import Modal from "../../UI/Modal";
@@ -10,43 +11,53 @@ import Button from "../../UI/Button";
 import { ReactComponent as UpdateIcon } from '../../assets/icons/update.svg';
 import '../../styles/modalupdate.css'
 
-const ModalUpdate = observer(() => {
-  const { store, modal } = useContext(Context);
-
-  const updateSpeciality = () => {
-    const id = modal.id;
-    const name = modal.name;
-    const code = modal.code;
-    const active = modal.active;
-    store.specialities.updateSpeciality(id, name, code, active);
-    modal.setActiveUpdate(false);
-  };
+const ModalUpdate = observer(({speciality, show, setShow}) => {
+  const { store } = useContext(Context);
+  
+  const formik = useFormik({
+    initialValues: {
+      name: speciality.name,
+      code: speciality.code,
+    },
+    onSubmit: values => {
+      const id = speciality.id
+      const name = values.name
+      const code = values.code
+      const active = speciality.active
+      store.specialities.updateSpeciality(id, name, code, active);
+      setShow(false);
+    }
+  })
 
   return (
     <Modal
-      active={modal.isActiveUpdate}
-      setActive={modal.setActiveUpdate}
+      active={show}
+      setActive={setShow}
       header={"Изменить специальность"}
     >
-      <TextField
-        label="Специальность"
-        placeholder="Мастер слесарных работ"
-        value={modal.name}
-        onChange={(e) => modal.setName(e.target.value)}
-      />
-      <TextField
-        label="ФГОС"
-        placeholder="52.02.01"
-        value={modal.code}
-        onChange={(e) => modal.setCode(e.target.value)}
-      />
+      <form onSubmit={formik.handleSubmit}>
+        <TextField
+          id="name"
+          name="name"
+          label="Специальность"
+          placeholder="Мастер слесарных работ"
+          value={formik.values.name}
+          onChange={formik.handleChange}
+        />
+        <TextField
+          id="code"
+          name="code"
+          label="ФГОС"
+          placeholder="52.02.01"
+          value={formik.values.code}
+          onChange={formik.handleChange}
+        />
 
-      <Button
-        onClick={updateSpeciality}
-      >
-        Изменить
-        <UpdateIcon className='modal-update__icon'/>
-      </Button>
+        <Button>
+          Изменить
+          <UpdateIcon className='modal-update__icon'/>
+        </Button>
+      </form>
     </Modal>
   );
 });

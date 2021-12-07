@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { observer } from "mobx-react-lite";
 
 import { Context } from "../../index";
@@ -12,10 +12,10 @@ import { ReactComponent as DeleteIcon } from '../../assets/icons/delete.svg';
 
 const Direction = observer(({ direction }) => {
   const { store, modal } = useContext(Context);
-  const history = useHistory();
+  const navigate = useNavigate();
 
   const linkTo = () => {
-    history.push(`/speciality/${store.specialities.speciality.id}/direction/${direction.id}`);
+    navigate(`/speciality/${store.specialities.speciality.id}/direction/${direction.id}`);
   };
 
   const changeSwitch = () => {

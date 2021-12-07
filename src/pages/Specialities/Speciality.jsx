@@ -1,6 +1,6 @@
-import React, { useContext } from "react";
+import React, { useState, useContext } from "react";
 import { observer } from "mobx-react-lite";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 import { Context } from "../../index";
 import ModalUpdate from "./ModalUpdate";
@@ -11,29 +11,23 @@ import { ReactComponent as UpdateIcon } from '../../assets/icons/update.svg';
 import { ReactComponent as DeleteIcon } from '../../assets/icons/delete.svg';
 
 const Speciality = observer(({ spec }) => {
-  const { store, modal } = useContext(Context);
-  const history = useHistory();
-
-  const linkTo = () => {
-    history.push(`/speciality/${spec.id}`);
-  };
+  const { store } = useContext(Context);
+  const [ modalUpdate, setModalUpdate ] = useState(false);
+  const navigate = useNavigate();
 
   const changeSwitch = () => {
-    const id = spec.id;
-    const name = spec.name;
-    const code = spec.code;
-    const active = !spec.active;
-    store.specialities.updateSpeciality(id, name, code, active);
+    store.specialities.updateSpeciality(
+      spec.id, 
+      spec.name, 
+      spec.code, 
+      !spec.active
+    );
   };
 
   const showModal = (e) => {
     e.stopPropagation();
 
-    modal.setId(spec.id);
-    modal.setName(spec.name);
-    modal.setCode(spec.code);
-    modal.setActive(spec.active);
-    modal.setActiveUpdate(true);
+    setModalUpdate(true);
   };
 
   const deleteSpeciality = (e) => {
@@ -44,9 +38,16 @@ const Speciality = observer(({ spec }) => {
 
   return (
     <>
-      <ModalUpdate/>
+      <ModalUpdate 
+        speciality={spec} 
+        show={modalUpdate} 
+        setShow={setModalUpdate} 
+      />
 
-      <div className="table__row" onClick={linkTo}>
+      <div 
+        className="table__row" 
+        onClick={() => navigate(`/speciality/${spec.id}`)}
+      >
         <div className="table__cell">{spec.id}</div>
         <div className="table__cell">{spec.name}</div>
         <div className="table__cell">{spec.code}</div>
@@ -57,7 +58,7 @@ const Speciality = observer(({ spec }) => {
           />
         </div>
         <div className="table__cell">
-          <div onClick={e => showModal(e)}>
+          <div onClick={showModal}>
             <UpdateIcon className="edit-icon" />
             <span className="update-text">Изменить</span>
           </div>

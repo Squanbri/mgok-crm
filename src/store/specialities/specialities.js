@@ -37,6 +37,7 @@ class Specialities {
 
   // FETCH ALL
   async fetchSpecialities() {
+    this.setLoading(true);
     this.specialities.clear();
     const res = await SpecialitiesAPI.fetchSpecialities();
 
