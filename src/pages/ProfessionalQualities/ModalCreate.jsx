@@ -1,5 +1,6 @@
 import React, { useContext } from "react";
 import { observer } from "mobx-react-lite";
+import { useFormik } from 'formik';
 
 import { Context } from "../../index";
 import Modal from "../../UI/Modal";
@@ -9,43 +10,54 @@ import Button from "../../UI/Button";
 /* assets */
 import { ReactComponent as PlusIcon } from '../../assets/icons/add.svg';
 
-const ModalCreate = observer(({id}) => {
-  const { store, modal } = useContext(Context);
+const ModalCreate = observer(({id, show, setShow}) => {
+  const { store } = useContext(Context);
 
-  const addProfessional = () => {
-    const groupId = id
-    const name = modal.name
-    const hours = modal.hours
-    store.professionals.addProfessional(name, hours, groupId);
-    modal.setActiveCreate(false);
-  };
+  const formik = useFormik({
+    initialValues: {
+      name: '',
+      hours: ''
+    },
+    onSubmit: values => {
+      const groupId = id
+      const name = values.name
+      const hours = values.hours
+      store.professionals.addProfessional(name, hours, groupId);
+      setShow(false);
+    }
+  })
 
-  if (!modal.isActiveCreate) return null;
+  if (!show) return null;
 
   return (
     <Modal 
-      active={modal.isActiveCreate} 
-      setActive={modal.setActiveCreate} 
+      active={show} 
+      setActive={setShow}  
       header={'Добавить профессиональное качество'}
     >
-      <TextField
-        label="Качество"
-        placeholder="Например: Система допусков и посадок"
-        onChange={(e) => modal.setName(e.target.value)}
-      />
+      <form onSubmit={formik.handleSubmit}>
+        <TextField
+          id="name"
+          name="name"
+          label="Качество"
+          value={formik.values.name}
+          onChange={formik.handleChange}
+        />
 
-      <TextField
-        label="Количество часов"
-        placeholder="Например: 36 ч."
-        onChange={(e) => modal.setHours(e.target.value)}
-      />
+        <TextField
+          id="hours"
+          name="hours"
+          label="Количество часов"
+          placeholder="Например: 36 ч."
+          value={formik.values.hours}
+          onChange={formik.handleChange}
+        />
 
-      <Button
-        onClick={addProfessional}
-      >
-        Добавить
-        <PlusIcon/>
-      </Button>
+        <Button>
+          Добавить
+          <PlusIcon/>
+        </Button>
+      </form>
     </Modal>
   );
 });

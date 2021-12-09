@@ -25,6 +25,9 @@ const ModalCreate = observer(({show, setShow}) => {
       setShow(false);
     }
   })
+
+  if (!show) return null;
+  
   return (
     <Modal 
       active={show} 

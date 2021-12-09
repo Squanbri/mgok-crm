@@ -4,7 +4,6 @@ import ReactDOM from 'react-dom';
 import App from './App';
 import Auth from "./store/auth";
 import Store from "./store/store";
-import Modal from "./store/modal";
 import Errors from "./store/errors";
 import './styles/index.css';
 
@@ -14,7 +13,6 @@ ReactDOM.render(
     <Context.Provider value={{
         auth: new Auth(),
         store: new Store(),
-        modal: new Modal(),
         errors: Errors
     }}>
         <App/>

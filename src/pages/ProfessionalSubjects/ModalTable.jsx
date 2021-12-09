@@ -1,12 +1,9 @@
-import React, { useContext } from "react";
+import React from "react";
 import { observer } from "mobx-react-lite";
 
-import { Context } from "../../index";
 import TextField from "../../UI/TextField";
 
-const ModalTable = observer(() => {
-  const { modal } = useContext(Context);
-
+const ModalTable = observer(({formik}) => {
   return (
     <>
       <div className="table">
@@ -20,49 +17,91 @@ const ModalTable = observer(() => {
           <div className="table__row prof-subject__row">
             <div className="table__cell">Самостоятельная работа</div>
             <div className="table__cell">
-              <TextField onChange={(e) => modal.setIndependentWorkHours(e.target.value)}/>
+              <TextField 
+                id="independentWorkHours"
+                name="independentWorkHours"
+                value={formik.values.independentWorkHours}
+                onChange={formik.handleChange}
+                placeholder="0"
+              />
             </div>
           </div>
 
           <div className="table__row prof-subject__row">
             <div className="table__cell">Теоретическое обучение</div>
             <div className="table__cell">
-              <TextField onChange={(e) => modal.setTheoreticalLearningHours(e.target.value)}/>
+              <TextField 
+                id="theoreticalLearningHours"
+                name="theoreticalLearningHours"
+                value={formik.values.theoreticalLearningHours}
+                onChange={formik.handleChange}
+                placeholder="0"
+              />
             </div>
           </div>
 
           <div className="table__row prof-subject__row">
             <div className="table__cell">Лабораторная работа</div>
             <div className="table__cell">
-              <TextField onChange={(e) => modal.setLaboratoryWorkHours(e.target.value)}/>
+             <TextField 
+                id="laboratoryWorkHours"
+                name="laboratoryWorkHours"
+                value={formik.values.laboratoryWorkHours}
+                onChange={formik.handleChange}
+                placeholder="0"
+              />
             </div>
           </div>
 
           <div className="table__row prof-subject__row">
             <div className="table__cell">Курсовые</div>
             <div className="table__cell">
-              <TextField onChange={(e) => modal.setCourseWorksHours(e.target.value)}/>
+              <TextField 
+                id="courseWorksHours"
+                name="courseWorksHours"
+                value={formik.values.courseWorksHours}
+                onChange={formik.handleChange}
+                placeholder="0"
+              />
             </div>
           </div>
 
           <div className="table__row prof-subject__row">
             <div className="table__cell">Минимальное количество часов</div>
             <div className="table__cell">
-              <TextField onChange={(e) => modal.setMinimalHours(e.target.value)}/>
+              <TextField 
+                id="minimalHours"
+                name="minimalHours"
+                value={formik.values.minimalHours}
+                onChange={formik.handleChange}
+                placeholder="0"
+              />
             </div>
           </div>
 
           <div className="table__row prof-subject__row">
             <div className="table__cell">Практика</div>
             <div className="table__cell">
-              <TextField onChange={(e) => modal.setPracticeHours(e.target.value)}/>
+              <TextField 
+                id="practiceHours"
+                name="practiceHours"
+                value={formik.values.practiceHours}
+                onChange={formik.handleChange}
+                placeholder="0"
+              />
             </div>
           </div>
 
           <div className="table__row prof-subject__row">
             <div className="table__cell">Аттестация</div>
             <div className="table__cell">
-              <TextField onChange={(e) => modal.setCertificationHours(e.target.value)}/>
+              <TextField 
+                id="certificationHours"
+                name="certificationHours"
+                value={formik.values.certificationHours}
+                onChange={formik.handleChange}
+                placeholder="0"
+              />
             </div>
           </div>
 
@@ -70,11 +109,29 @@ const ModalTable = observer(() => {
             <div className="table__cell">Тип аттестации</div>
             <div className="table__cell">
               <div className="cell__check-box">
-                <label onClick={() => modal.setCertificationType('Экзамен')}>
-                  <input type="radio" name="checkbox" value="value"/>Экзамен
+                <label>
+                  <input 
+                    type="radio" 
+                    id="certificationType"
+                    name="certificationType" 
+                    value="Экзамен"
+                    onChange={formik.handleChange}
+                  />
+                  Экзамен
+                  <span></span>
                 </label>
-                <label onClick={() => modal.setCertificationType('Зачет')}>
-                  <input type="radio" name="checkbox" defaultChecked value="value"/>Зачет
+                
+                <label>
+                  <input 
+                    type="radio" 
+                    id="certificationType"
+                    name="certificationType" 
+                    defaultChecked 
+                    value="Зачет"
+                    onChange={formik.handleChange}
+                  />
+                  Зачет
+                  <span></span>
                 </label>
               </div>
             </div>

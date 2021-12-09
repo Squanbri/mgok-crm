@@ -6,36 +6,37 @@ import useFetch from "../../hooks/useFetch";
 import ModalCreate from "./ModalCreate";
 import PageHead from "../../components/PageHead";
 import TableHeader from "./TableHeader";
-import UsersList from "./UsersList";
-import "../../styles/table.css";
+import QualitiesList from "./QualitiesList";
 
-const Users = observer(() => {
+import "../../styles/table.css";
+import "../../styles/specialitiesTable.css";
+
+const PersonalQualities = observer(() => {
   const { store } = useContext(Context);
-  const [modalActive, setModalActive] = useState(false);
-  const users = store.users;
+  const [modalActive, setModalActive] = useState(true);
 
   useFetch(async () => {
-    await users.fetchUsers();
-  });
+    await store.personalsQualities.fetchQualities()
+  })
 
   return (
     <section>
       <ModalCreate show={modalActive} setShow={setModalActive} />
 
       <PageHead setModalActive={setModalActive}>
-        <h3 className="text-header">Пользователи</h3>
+        <h3 className="text-header">Личностные качества</h3>
       </PageHead>
 
       <div className="table">
         <div className="table__head">
-          <TableHeader/>
+          <TableHeader />
         </div>
         <div className="table__body">
-          <UsersList/>
+          <QualitiesList />
         </div>
       </div>
     </section>
   );
 });
 
-export default Users;
+export default PersonalQualities;

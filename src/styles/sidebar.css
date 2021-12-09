@@ -25,14 +25,14 @@
 }
 
 .nav-links__item .active {
-  color: #597e9d;
+  color: #597e9d !important;
   font-weight: 700;
 }
 
 .nav-link {
   text-decoration: none;
   color: #484C51;
-  font-size: 20px;
+  font-size: 18px;
   transition: color 0.25s ease-in-out;
   font-weight: 600;
 }

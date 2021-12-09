@@ -1,28 +1,27 @@
-import React, { useContext } from "react";
+import React, { useState } from "react";
 import { observer } from "mobx-react-lite";
 
-import { Context } from "../../index";
 import ModalUpdate from "./ModalUpdate";
 
 /* assets */
 import { ReactComponent as UpdateIcon } from '../../assets/icons/update.svg';
 
 const Subject = observer(({ subject }) => {
-  const { modal } = useContext(Context);
+  const [ modalUpdate, setModalUpdate ] = useState(false);
 
   const showModal = (e) => {
     e.stopPropagation();
 
-    modal.setId(subject.id);
-    modal.setName(subject.name);
-    modal.setCode(subject.code);
-    modal.setActive(subject.active);
-    modal.setActiveUpdate(true);
+    setModalUpdate(true);
   };
 
   return (
     <>
-      <ModalUpdate />
+      <ModalUpdate 
+        subject={subject} 
+        show={modalUpdate} 
+        setShow={setModalUpdate} 
+      />
 
       <div className="table__row">
         <div className="table__cell">{subject.id}</div>

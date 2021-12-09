@@ -1,5 +1,6 @@
 import React, { useContext } from "react";
 import { observer } from "mobx-react-lite";
+import { useFormik } from "formik";
 
 import { Context } from "../../index";
 import Modal from "../../UI/Modal";
@@ -10,35 +11,44 @@ import Button from "../../UI/Button";
 import { ReactComponent as UpdateIcon } from '../../assets/icons/update.svg';
 import '../../styles/modalupdate.css'
 
-const ModalUpdate = observer(() => {
-  const { store, modal } = useContext(Context);
+const ModalUpdate = observer(({ group, show, setShow }) => {
+  const { store } = useContext(Context);
 
-  const updateGroup = () => {
-    const id = modal.id;
-    const name = modal.name;
-    const active = modal.active;
-    store.groups.updateGroup(name, active, id);
-    modal.setActiveUpdate(false);
-  };
+  const formik = useFormik({
+    initialValues: {
+      name: group.name,
+    },
+    onSubmit: values => {
+      const id = group.id;
+      const name = values.name;
+      const active = group.active;
+      store.groups.updateGroup(name, active, id);
+     setShow(false);
+    }
+  })
 
-  if (!modal.isActiveUpdate) return null;
+  if (!show) return null;
 
   return (
     <Modal
-      active={modal.isActiveUpdate}
-      setActive={modal.setActiveUpdate}
+      active={show}
+      setActive={setShow}
       header={"Изменить наименование профессиональной группы"}
     >
-      <TextArea
-        placeholder="Изготовление деталей средней сложности типа тел вращения с точностью размеров до 10, 11 квалитета на токарно-карусельных станках с диаметром планшайбы до 4000 мм..."
-        value={modal.name}
-        onChange={(e) => modal.setName(e.target.value)}
-      />
+      <form onSubmit={formik.handleSubmit}>
+        <TextArea
+          id="name"
+          name="name"
+          placeholder="Изготовление деталей средней сложности типа тел вращения с точностью размеров до 10, 11 квалитета на токарно-карусельных станках с диаметром планшайбы до 4000 мм..."
+          value={formik.values.name}
+          onChange={formik.handleChange}
+        />
 
-      <Button onClick={updateGroup}>
-        Изменить
-        <UpdateIcon className="modal-update__icon" />
-      </Button>
+        <Button>
+          Изменить
+          <UpdateIcon className="modal-update__icon" />
+        </Button>
+      </form>
     </Modal>
   );
 });

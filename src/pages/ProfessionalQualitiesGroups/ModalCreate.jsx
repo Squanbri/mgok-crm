@@ -1,5 +1,6 @@
 import React, { useContext } from "react";
 import { observer } from "mobx-react-lite";
+import { useFormik } from 'formik';
 
 import { Context } from "../../index";
 import Modal from "../../UI/Modal";
@@ -9,35 +10,43 @@ import Button from "../../UI/Button";
 /* assets */
 import { ReactComponent as PlusIcon } from '../../assets/icons/add.svg';
 
-const ModalCreate = observer(({id}) => {
-  const { store, modal } = useContext(Context);
+const ModalCreate = observer(({id, show, setShow}) => {
+  const { store } = useContext(Context);
 
-  const addGroup = () => {
-    const directionId = id
-    const name = modal.name
-    store.groups.addGroup(name, directionId);
-    modal.setActiveCreate(false);
-  };
+  const formik = useFormik({
+    initialValues: {
+      name: '',
+    },
+    onSubmit: values => {
+      const directionId = id
+      const name = values.name
+      store.groups.addGroup(name, directionId);
+      setShow(false);
+    }
+  })
 
-  if (!modal.isActiveCreate) return null;
+  if (!show) return null;
 
   return (
     <Modal 
-      active={modal.isActiveCreate} 
-      setActive={modal.setActiveCreate} 
+      active={show} 
+      setActive={setShow} 
       header={'Добавить наименование профессиональной группы'}
     >
-      <TextArea
-        placeholder="Изготовление деталей средней сложности типа тел вращения с точностью размеров до 10, 11 квалитета на токарно-карусельных станках с диаметром планшайбы до 4000 мм..."
-        onChange={(e) => modal.setName(e.target.value)}
-      />
+      <form onSubmit={formik.handleSubmit}>
+        <TextArea
+          id="name"
+          name="name"
+          placeholder="Изготовление деталей средней сложности типа тел вращения с точностью размеров до 10, 11 квалитета на токарно-карусельных станках с диаметром планшайбы до 4000 мм..."
+          value={formik.values.name}
+          onChange={formik.handleChange}
+        />
 
-      <Button
-        onClick={addGroup}
-      >
-        Добавить
-        <PlusIcon/>
-      </Button>
+        <Button>
+          Добавить
+          <PlusIcon/>
+        </Button>
+      </form>
     </Modal>
   );
 });

@@ -125,6 +125,31 @@
   display: flex;
   gap: 15px;
   align-items: center;
+  cursor: pointer;
+}
+
+.professional-subjects .modal .table__row .cell__check-box label input {
+  display: none;
+}
+
+.professional-subjects .modal .table__row .cell__check-box label span {
+  display: block;
+  width: 20px;
+  height: 20px;
+  box-sizing: border-box;
+  border: 1px solid #2183AA;
+  border-radius: 1px;
+  background-color: #fff;
+  cursor: pointer;
+  transition: background-color .2s ease-in-out;
+}
+
+.professional-subjects .modal .table__row .cell__check-box label input:checked + span {
+  background-color: #2183AA;
+  background-image: url('../assets/icons/complete.svg');
+  background-repeat: no-repeat;
+  background-size: 12px;
+  background-position: center;
 }
 
 .professional-subjects .modal .table__row .cell__check-box input {

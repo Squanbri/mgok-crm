@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { observer } from "mobx-react-lite";
 
@@ -10,7 +10,8 @@ import Switch from "../../UI/Switch";
 import { ReactComponent as UpdateIcon } from '../../assets/icons/update.svg';
 
 const Direction = observer(({ group }) => {
-  const { store, modal } = useContext(Context);
+  const { store } = useContext(Context);
+  const [ modalUpdate, setModalUpdate ] = useState(false);
   const navigate = useNavigate();
 
   const linkTo = () => {
@@ -18,24 +19,26 @@ const Direction = observer(({ group }) => {
   };
 
   const changeSwitch = () => {
-    const id = group.id;
-    const name = group.name;
-    const active = !group.active;
-    store.groups.updateGroup(name, active, id);
+    store.groups.updateGroup(
+      group.name, 
+      !group.active, 
+      group.id
+    );
   };
 
   const showModal = (e) => {
     e.stopPropagation();
 
-    modal.setId(group.id);
-    modal.setName(group.name);
-    modal.setActive(group.active);
-    modal.setActiveUpdate(true);
+    setModalUpdate(true);
   };
 
   return (
     <>
-      <ModalUpdate/>
+      <ModalUpdate
+        group={group} 
+        show={modalUpdate} 
+        setShow={setModalUpdate} 
+      />
 
       <div className="table__row" onClick={linkTo}>
         <div className="table__cell">{group.id}</div>

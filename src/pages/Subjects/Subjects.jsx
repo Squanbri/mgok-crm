@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useState, useContext } from "react";
 import { observer } from "mobx-react-lite";
 
 import { Context } from "../../index";
@@ -12,16 +12,17 @@ import "../../styles/specialitiesTable.css";
 
 const Subjects = observer(() => {
     const {store} = useContext(Context)
-    const subjects = store.subjects
+    const [modalActive, setModalActive] = useState(false);
 
     useFetch(async () => {
-    await subjects.fetchSubjects()
+    await store.subjects.fetchSubjects()
     })
 
     return (
         <section>
-          <ModalCreate/>
-          <PageHead>
+          <ModalCreate show={modalActive} setShow={setModalActive} />
+
+          <PageHead setModalActive={setModalActive}>
             <h3 className="text-header">Предметы</h3>
           </PageHead>
     

@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 
 import '../styles/textfield.css';
 
-const TextField = ({id, name, label, placeholder, value, onChange, children}) => {
+const TextField = ({id, name, type, label, placeholder, value, onChange, children}) => {
   const [focus, setFocus] = useState(false);
 
   const onChangeEvent = (e) => {
@@ -23,7 +23,7 @@ const TextField = ({id, name, label, placeholder, value, onChange, children}) =>
       }
 
       <input 
-        type="text" 
+        type={type || "text"}
         id={id}
         name={name}
         className="input__block" 

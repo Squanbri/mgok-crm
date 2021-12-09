@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useState, useContext } from "react";
 import { useParams } from "react-router-dom";
 import { observer } from "mobx-react-lite";
 
@@ -11,8 +11,9 @@ import SubjectsList from "./SubjectsList";
 import Breadcrumbs from "../../components/Breadcrumbs";
 
 const ProfessionalSubjects = observer(() => {
-  const { specId, dirId, groupId, profId } = useParams();
   const { store } = useContext(Context);
+  const { specId, dirId, groupId, profId } = useParams();
+  const [modalActive, setModalActive] = useState(false);
 
   const speciality = store.specialities.speciality;
   const direction = store.directions.direction;
@@ -21,6 +22,7 @@ const ProfessionalSubjects = observer(() => {
   const name = professional?.name || 'Предметы'
 
   useFetch(async () => {
+    store.professionalSubjects.setLoading(true)
     await store.specialities.fetchSpeciality(specId);
     await store.directions.fetchDirection(dirId);
     await store.groups.fetchGroup(groupId);
@@ -37,8 +39,14 @@ const ProfessionalSubjects = observer(() => {
         {name: group?.name, path: `/speciality/${speciality?.id}/direction/${direction?.id}/group/${group?.id}`},
         {name: name, path: '/', active: true},
       ]}/>
-      <ModalCreate id={profId}/>
-      <PageHead>
+
+      <ModalCreate 
+        id={profId} 
+        show={modalActive} 
+        setShow={setModalActive} 
+      />
+
+      <PageHead setModalActive={setModalActive}>
         <h3 className="text-header">{name}</h3>
       </PageHead>
 

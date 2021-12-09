@@ -10,16 +10,18 @@ const Modal = ({ active, setActive, header, children }) => {
     document.body.classList.add('modal-active');
   }
   else {
-    document.body.classList.remove('modal-active');
     return null
   }
 
   return (
     <div 
       className="modal__wrapper" 
-      onClick={() => setActive(false)}
+      onMouseDown={() => setActive(false)}
     >
-      <div className="modal" onClick={e => e.stopPropagation()}>
+      <div className="modal" 
+        onMouseDown={e => e.stopPropagation()}
+        onClick={e => e.stopPropagation()}
+      >
         <div className="modal__content">
           <h3 className="modal__header">{header}</h3>
 
@@ -27,7 +29,10 @@ const Modal = ({ active, setActive, header, children }) => {
         </div>
 
         <div className="modal__close">
-          <Button onClick={() => setActive(false)}>
+          <Button onClick={() => {
+            document.body.classList.remove('modal-active')
+            setActive(false)
+          }}>
             Закрыть
             <CloseIcon />
           </Button>

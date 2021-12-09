@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { observer } from "mobx-react-lite";
 
@@ -11,7 +11,8 @@ import { ReactComponent as UpdateIcon } from '../../assets/icons/update.svg';
 import { ReactComponent as DeleteIcon } from '../../assets/icons/delete.svg';
 
 const Direction = observer(({ direction }) => {
-  const { store, modal } = useContext(Context);
+  const { store } = useContext(Context);
+  const [ modalUpdate, setModalUpdate ] = useState(false);
   const navigate = useNavigate();
 
   const linkTo = () => {
@@ -19,21 +20,18 @@ const Direction = observer(({ direction }) => {
   };
 
   const changeSwitch = () => {
-    const id = direction.id;
-    const name = direction.name;
-    const code = direction.code;
-    const active = !direction.active;
-    store.directions.updateDirection(id, name, code, active);
+    store.directions.updateDirection(
+      direction.id, 
+      direction.name, 
+      direction.code, 
+      !direction.active
+    );
   };
 
   const showModal = (e) => {
     e.stopPropagation();
 
-    modal.setId(direction.id);
-    modal.setName(direction.name);
-    modal.setCode(direction.code);
-    modal.setActive(direction.active);
-    modal.setActiveUpdate(true);
+    setModalUpdate(true);
   };
 
   const deleteDirection = (e) => {
@@ -44,7 +42,11 @@ const Direction = observer(({ direction }) => {
 
   return (
     <>
-      <ModalUpdate/>
+      <ModalUpdate
+        direction={direction} 
+        show={modalUpdate} 
+        setShow={setModalUpdate} 
+      />
 
       <div className="table__row" onClick={linkTo}>
         <div className="table__cell">{direction.id}</div>

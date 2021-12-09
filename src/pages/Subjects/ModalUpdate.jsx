@@ -1,59 +1,65 @@
-import React, {useContext} from 'react';
-import {Button, TextField, Typography} from "@mui/material";
-import {observer} from "mobx-react-lite";
+import React, { useContext } from "react";
+import { observer } from "mobx-react-lite";
+import { useFormik } from "formik";
 
-import {Context} from "../../index";
+import { Context } from "../../index";
 import Modal from "../../UI/Modal";
+import TextField from "../../UI/TextField";
+import Button from "../../UI/Button";
 
-const ModalUpdate = observer(({active, setActive}) => {
-    const {store, modal} = useContext(Context)
+/* assets */
+import { ReactComponent as UpdateIcon } from '../../assets/icons/update.svg';
+import '../../styles/modalupdate.css'
 
-    const updateSubject = () => {
-        const id = modal.id
-        const name = modal.name
-        const code = modal.code
-        const active = modal.active
-        store.subjects.updateSubject(id, name, code, active)
-        setActive(false)
+const ModalUpdate = observer(({ subject, show, setShow }) => {
+  const { store } = useContext(Context);
+
+  const formik = useFormik({
+    initialValues: {
+      name: subject.name,
+      code: subject.code,
+    },
+    onSubmit: values => {
+      const id = subject.id
+      const name = values.name
+      const code = values.code
+      const active = subject.active
+      store.subjects.updateSubject(id, name, code, active)
+      setShow(false);
     }
+  })
 
-    return (
-        <Modal active={active} setActive={setActive}>
-            <Typography
-                variant="h4"
-                component="span"
-                sx={{mb: '30px'}}
-            >
-                Изменить предмет
-            </Typography>
+  return (
+    <Modal 
+      active={show} 
+      setActive={setShow} 
+      header={"Изменить предмет"}
+    >
+      <form onSubmit={formik.handleSubmit}>
+        <TextField
+          id="name"
+          name="name"
+          label="Специальность"
+          placeholder="Мастер слесарных работ"
+          value={formik.values.name}
+          onChange={formik.handleChange}
+        />
+        <TextField
+          id="code"
+          name="code"
+          label="ФГОС"
+          placeholder="52.02.01"
+          value={formik.values.code}
+          onChange={formik.handleChange}
+        />
 
-            <TextField
-                id="outlined-basic"
-                label="Название предмета"
-                variant="outlined"
-                sx={{mb: '15px'}}
-                value={modal.name}
-                onChange={(e) => modal.setName(e.target.value)}
-            />
-            <TextField
-                id="outlined-basic"
-                label="Код предмета"
-                variant="outlined"
-                sx={{mb: '30px'}}
-                value={modal.code}
-                onChange={(e) => modal.setCode(e.target.value)}
-            />
-
-            <Button
-                variant="contained"
-                color="success"
-                onClick={() => updateSubject()}
-                sx={{width: 'fit-content'}}
-            >
-                Изменить
-            </Button>
-        </Modal>
-    );
+        <Button>
+          Изменить
+          <UpdateIcon className='modal-update__icon'/>
+        </Button>
+      </form>
+    </Modal>
+  );
 });
 
 export default ModalUpdate;

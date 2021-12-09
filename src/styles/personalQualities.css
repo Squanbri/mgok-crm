@@ -1,0 +1,9 @@
+.personal-qualities__row {
+  position: relative;
+  grid-template-columns: 5% 47% 14% 14% 6% 14%;
+}
+
+.personal-qualities__row .table__cell:nth-child(2) {
+  padding-left: 60px;
+  justify-content: flex-start;
+}

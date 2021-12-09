@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useState, useContext } from "react";
 import { useParams } from "react-router-dom";
 import { observer } from "mobx-react-lite";
 
@@ -11,12 +11,14 @@ import DirectionsList from "./DirectionsList";
 import Breadcrumbs from "../../components/Breadcrumbs";
 
 const Directions = observer(() => {
-  const { id } = useParams();
   const { store } = useContext(Context);
+  const { id } = useParams();
+  const [modalActive, setModalActive] = useState(false);
   const speciality = store.specialities.speciality;
   const name = speciality?.name || 'Квалификации'
 
   useFetch(async () => {
+    store.directions.setLoading(true);
     await store.specialities.fetchSpeciality(id);
     await store.directions.fetchDirections(id);
   })
@@ -28,8 +30,9 @@ const Directions = observer(() => {
         {name: name, path: '/', active: true},
       ]}/>
 
-      <ModalCreate id={id}/>
-      <PageHead>
+      <ModalCreate id={id} show={modalActive} setShow={setModalActive} />
+
+      <PageHead setModalActive={setModalActive}>
         <h3 className="text-header">{name}</h3>
       </PageHead>
 

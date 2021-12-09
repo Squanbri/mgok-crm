@@ -29,12 +29,6 @@ class ProfessionalSubjects {
     return this.subjects.size === 0;
   }
 
-  // DELETE
-  deleteSubject(id) {
-    this.subjects.delete(id);
-    ProfessionalSubjectsAPI.deleteSubject(id);
-  }
-
   // FETCH ALL
   async fetchSubjects(id) {
     this.subjects.clear();

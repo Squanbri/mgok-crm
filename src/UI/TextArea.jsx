@@ -1,10 +1,8 @@
 import React, { useState } from 'react';
-import _uniqueId from 'lodash/uniqueId';
 
 import '../styles/textarea.css';
 
-const TextArea = ({label, placeholder, value, onChange, children}) => {
-  const [id] = useState(_uniqueId('TextArea-'));
+const TextArea = ({id, name, label, placeholder, value, onChange, children}) => {
   const [focus, setFocus] = useState(false);
 
   const onChangeEvent = (e) => {
@@ -27,6 +25,7 @@ const TextArea = ({label, placeholder, value, onChange, children}) => {
       <textarea 
         type="text" 
         id={id}
+        name={name}
         className="textarea__block" 
         placeholder={placeholder}
         value={value}

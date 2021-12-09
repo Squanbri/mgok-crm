@@ -11,9 +11,11 @@ import Button from "../../UI/Button";
 import { ReactComponent as UpdateIcon } from '../../assets/icons/update.svg';
 import '../../styles/modalupdate.css'
 
-const ModalUpdate = observer(({speciality, show, setShow}) => {
+const ModalUpdate = observer(({ speciality, show, setShow }) => {
   const { store } = useContext(Context);
   
+  if (!show) return null;
+
   const formik = useFormik({
     initialValues: {
       name: speciality.name,
@@ -28,7 +30,6 @@ const ModalUpdate = observer(({speciality, show, setShow}) => {
       setShow(false);
     }
   })
-
   return (
     <Modal
       active={show}

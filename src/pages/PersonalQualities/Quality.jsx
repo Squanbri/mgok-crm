@@ -3,24 +3,23 @@ import { useNavigate } from "react-router-dom";
 import { observer } from "mobx-react-lite";
 
 import { Context } from "../../index";
-import ModalUpdate from "./ModalUpdate";
+// import ModalUpdate from "./ModalUpdate";
 import Switch from "../../UI/Switch";
 
 /* assets */
 import { ReactComponent as UpdateIcon } from '../../assets/icons/update.svg';
-import { ReactComponent as DeleteIcon } from '../../assets/icons/delete.svg';
 
-const Speciality = observer(({ spec }) => {
+const Quality = observer(({ quality }) => {
   const { store } = useContext(Context);
   const [ modalUpdate, setModalUpdate ] = useState(false);
   const navigate = useNavigate();
 
   const changeSwitch = () => {
-    store.specialities.updateSpeciality(
-      spec.id, 
-      spec.name, 
-      spec.code, 
-      !spec.active
+    store.personalQualities.updateQuality(
+      quality.id, 
+      quality.name, 
+      quality.hours, 
+      !quality.active
     );
   };
 
@@ -30,30 +29,25 @@ const Speciality = observer(({ spec }) => {
     setModalUpdate(true);
   };
 
-  const deleteSpeciality = (e) => {
-    e.stopPropagation();
-
-    store.specialities.deleteSpeciality(spec.id);
-  };
-
   return (
     <>
-      <ModalUpdate 
-        speciality={spec} 
+      {/* <ModalUpdate 
+        speciality={qua} 
         show={modalUpdate} 
         setShow={setModalUpdate} 
-      />
+      /> */}
 
       <div 
-        className="table__row" 
-        onClick={() => navigate(`/speciality/${spec.id}`)}
+        className="table__row personal-qualities__row" 
+        onClick={() => navigate(`/speciality/${quality.id}`)}
       >
-        <div className="table__cell">{spec.id}</div>
-        <div className="table__cell">{spec.name}</div>
-        <div className="table__cell">{spec.code}</div>
+        <div className="table__cell">{quality.id}</div>
+        <div className="table__cell">{quality.name}</div>
+        <div className="table__cell">{quality?.is_recomended}</div>
+        <div className="table__cell">{quality.hours}</div>
         <div className="table__cell" >
           <Switch
-            checked={!!spec.active}
+            checked={!!quality.active}
             onChange={changeSwitch}
           />
         </div>
@@ -63,15 +57,9 @@ const Speciality = observer(({ spec }) => {
             <span className="update-text">Изменить</span>
           </div>
         </div>
-        <div className="table__cell">
-          <div onClick={e => deleteSpeciality(e)}>
-            <DeleteIcon className="delete-icon"/>
-            <span className="delete-text">Удалить</span>
-          </div>
-        </div>
       </div>
     </>
   );
 });
 
-export default Speciality;
+export default Quality;

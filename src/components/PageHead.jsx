@@ -1,12 +1,10 @@
-import React, {useContext} from 'react';
+import React from 'react';
 
-import {Context} from '../index';
 import {ReactComponent as PlusIcon} from '../assets/icons/add.svg';
 import Button from '../UI/Button';
 import '../styles/pageheader.css';
 
 const PageHead = ({setModalActive, children}) => {
-  const {modal} = useContext(Context)
 
   return (
     <div className="page-header__wrapper">
