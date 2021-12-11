@@ -42,14 +42,14 @@ class PersonalQualities {
   }
 
   // ADD
-  async addQuality(name, hours, directionId) {
+  async addQuality(name, subjects) {
     const response = await PersonalQualitiesAPI.postQuality(
       name,
-      hours,
-      directionId
+      subjects
     );
-    if (response?.personal_qualities) {
-      const quality = response.personal_qualities;
+
+    if (response?.personal_quality) {
+      const quality = response.personal_quality;
       this.setQuality(quality);
     }
   }

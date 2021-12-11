@@ -50,3 +50,9 @@
   right: 60px;
   top: 60px;
 }
+
+.formik-validation {
+  display: block;
+  margin: -20px 0 20px 0;
+  color: #ff969aeb;
+}

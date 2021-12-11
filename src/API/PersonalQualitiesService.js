@@ -42,12 +42,13 @@ export default class personal_qualities {
     }
   }
 
-  static async postQuality(name, code) {
+  static async postQuality(name, subjects) {
     const token = localStorage.getItem("token");
 
     const data = {
       name,
-      fgos_code: code,
+      is_active: 1,
+      subjects,
     };
 
     const config = {

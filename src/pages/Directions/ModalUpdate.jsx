@@ -1,6 +1,7 @@
 import React, { useContext } from "react";
 import { observer } from "mobx-react-lite";
 import { useFormik } from "formik";
+import * as Yup from 'yup';
 
 import { Context } from "../../index";
 import Modal from "../../UI/Modal";
@@ -14,12 +15,24 @@ import '../../styles/modalupdate.css'
 const ModalUpdate = observer(({ direction, show, setShow }) => {
   const { store } = useContext(Context);
 
+  const closeModal = () => {
+    setShow();
+    formik.resetForm()
+  }
   
   const formik = useFormik({
     initialValues: {
       name: direction.name,
       code: direction.code,
     },
+    validationSchema: Yup.object({
+      name: Yup.string()
+        .trim()
+        .required('Название квалификации обязательно для заполнения'),
+      code: Yup.string()
+        .trim()
+        .required('ФГОС код обязателен для заполнения'),
+    }),
     onSubmit: values => {
       const id = direction.id
       const name = values.name
@@ -27,6 +40,7 @@ const ModalUpdate = observer(({ direction, show, setShow }) => {
       const active = direction.active
       store.directions.updateDirection(id, name, code, active);
       setShow(false);
+      formik.resetForm()
     }
   })
 
@@ -35,7 +49,7 @@ const ModalUpdate = observer(({ direction, show, setShow }) => {
   return (
     <Modal
       active={show}
-      setActive={setShow}
+      setActive={closeModal}
       header={"Изменить квалификацию"}
     >
       <form onSubmit={formik.handleSubmit}>
@@ -47,6 +61,9 @@ const ModalUpdate = observer(({ direction, show, setShow }) => {
           value={formik.values.name}
           onChange={formik.handleChange}
         />
+        {formik.touched.name && formik.errors.name ? (
+          <div className="formik-validation">{formik.errors.name}</div>
+        ) : null}
 
         <TextField
           id="code"
@@ -56,6 +73,9 @@ const ModalUpdate = observer(({ direction, show, setShow }) => {
           value={formik.values.code}
           onChange={formik.handleChange}
         />
+        {formik.touched.code && formik.errors.code ? (
+          <div className="formik-validation">{formik.errors.code}</div>
+        ) : null}
 
         <Button>
           Изменить

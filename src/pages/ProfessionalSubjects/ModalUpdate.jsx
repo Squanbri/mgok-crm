@@ -13,7 +13,12 @@ import '../../styles/modalupdate.css'
 
 const ModalUpdate = observer(({ subject, show, setShow }) => {
   const { store } = useContext(Context);
-  console.log(subject)
+  
+  const closeModal = () => {
+    setShow();
+    formik.resetForm()
+  }
+
   const formik = useFormik({
     initialValues: {
       independentWorkHours: subject.independentWorkHours,
@@ -39,6 +44,7 @@ const ModalUpdate = observer(({ subject, show, setShow }) => {
         values.certificationType
       );
       setShow(false);
+      formik.resetForm()
     }
   })
 
@@ -47,7 +53,7 @@ const ModalUpdate = observer(({ subject, show, setShow }) => {
   return (
     <Modal
       active={show}
-      setActive={setShow}
+      setActive={closeModal}
       header={"Изменить квалификацию"}
     >
       <form onSubmit={formik.handleSubmit}>

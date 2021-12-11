@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { observer } from "mobx-react-lite";
 
 import { Context } from "../../index";
+import '../../styles/professionalQualities.css';
 
 const Professional = observer(({ professional }) => {
   const { store } = useContext(Context);
@@ -19,7 +20,7 @@ const Professional = observer(({ professional }) => {
 
   return (
     <>
-      <div className="table__row" onClick={linkTo}>
+      <div className="table__row professional-quality__row" onClick={linkTo}>
         <div className="table__cell">{professional.id}</div>
         <div className="table__cell">{professional.name}</div>
         <div className="table__cell">{professional.hours}</div>

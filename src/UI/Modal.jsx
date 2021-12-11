@@ -5,11 +5,11 @@ import { ReactComponent as CloseIcon } from "../assets/icons/close.svg";
 import "../styles/modal.css";
 
 const Modal = ({ active, setActive, header, children }) => {
-
   if (active) {
     document.body.classList.add('modal-active');
   }
   else {
+    document.body.classList.remove('modal-active')
     return null
   }
 

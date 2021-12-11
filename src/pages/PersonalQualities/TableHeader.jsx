@@ -8,7 +8,6 @@ const TableHeader = () => {
                 <div className="table__row personal-qualities__row">
                     <div className="table__cell">ID</div>
                     <div className="table__cell">Качество</div>
-                    <div className="table__cell">Рекомендация</div>
                     <div className="table__cell">Количество часов</div>
                     <div className="table__cell"></div>
                     <div className="table__cell"></div>

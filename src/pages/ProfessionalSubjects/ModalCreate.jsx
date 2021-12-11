@@ -14,6 +14,11 @@ import ModalTable from "./ModalTable";
 const ModalCreate = observer(({id, show, setShow}) => {
   const { store } = useContext(Context);
 
+  const closeModal = () => {
+    setShow();
+    formik.resetForm()
+  }
+
   useFetch(async () => {
     await store.subjects.fetchSubjects();
   })
@@ -44,15 +49,13 @@ const ModalCreate = observer(({id, show, setShow}) => {
         values.certificationType
       );
       setShow(false);
+      formik.resetForm()
     }
   })
-
-  if (!show) return null;
-
   return (
     <Modal 
       active={show} 
-      setActive={setShow} 
+      setActive={closeModal} 
       header={'Добавить предмет'}
     > 
       <form onSubmit={formik.handleSubmit}>

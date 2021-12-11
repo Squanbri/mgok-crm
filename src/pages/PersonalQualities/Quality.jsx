@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { observer } from "mobx-react-lite";
 
 import { Context } from "../../index";
-// import ModalUpdate from "./ModalUpdate";
+import ModalUpdate from "./ModalUpdate";
 import Switch from "../../UI/Switch";
 
 /* assets */
@@ -31,11 +31,13 @@ const Quality = observer(({ quality }) => {
 
   return (
     <>
-      {/* <ModalUpdate 
-        speciality={qua} 
-        show={modalUpdate} 
-        setShow={setModalUpdate} 
-      /> */}
+      {modalUpdate &&
+        <ModalUpdate 
+          quality={quality} 
+          show={modalUpdate} 
+          setShow={setModalUpdate} 
+        />
+      }
 
       <div 
         className="table__row personal-qualities__row" 
@@ -43,7 +45,6 @@ const Quality = observer(({ quality }) => {
       >
         <div className="table__cell">{quality.id}</div>
         <div className="table__cell">{quality.name}</div>
-        <div className="table__cell">{quality?.is_recomended}</div>
         <div className="table__cell">{quality.hours}</div>
         <div className="table__cell" >
           <Switch

@@ -13,7 +13,7 @@ import "../../styles/specialitiesTable.css";
 
 const PersonalQualities = observer(() => {
   const { store } = useContext(Context);
-  const [modalActive, setModalActive] = useState(true);
+  const [modalActive, setModalActive] = useState(false);
 
   useFetch(async () => {
     await store.personalsQualities.fetchQualities()

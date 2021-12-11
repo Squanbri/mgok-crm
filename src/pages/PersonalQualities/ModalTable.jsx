@@ -6,9 +6,9 @@ import TextField from "../../UI/TextField";
 const ModalTable = observer(({formik}) => {
   return (
     <>
-      <div className="table">
+      <div className="table personal-quality__table">
         <div className="table__head">
-          <div className="table__row prof-subject__row">
+          <div className="table__row personal-quality__row">
             <div className="table__cell">Наименование предмета</div>
             <div className="table__cell">Количество часов</div>
           </div>
@@ -19,13 +19,13 @@ const ModalTable = observer(({formik}) => {
             if (!subject.active) return null
 
             return (
-              <div className="table__row prof-subject__row" key={subject.id}>
+              <div className="table__row personal-quality__row" key={subject.id}>
                 <div className="table__cell">{subject.name}</div>
                 <div className="table__cell">
                   <TextField 
-                    id={`subjects[${subject.id}].hours`}
-                    name={`subjects[${subject.id}].hours`}
-                    value={formik.values.independentWorkHours}
+                    id={`subjects[${subject.id - 1}].hours`}
+                    name={`subjects[${subject.id - 1}].hours`}
+                    value={formik.values.subjects[subject.id - 1].hours ?? 0}
                     onChange={formik.handleChange}
                     placeholder="0"
                   />

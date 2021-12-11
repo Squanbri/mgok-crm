@@ -1,0 +1,9 @@
+.professional-quality__row {
+  position: relative;
+  grid-template-columns: 5% 75% 20%;
+}
+
+.professional-quality__row .table__cell:nth-child(2) {
+  padding-left: 60px;
+  justify-content: flex-start !important;
+}

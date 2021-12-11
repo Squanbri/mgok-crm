@@ -12,7 +12,7 @@ import Button from "../../UI/Button";
 import { ReactComponent as PlusIcon } from '../../assets/icons/add.svg';
 import ModalTable from "./ModalTable";
 
-const ModalCreate = observer(({show, setShow}) => {
+const ModalCreate = observer(({quality, show, setShow}) => {
   const { store } = useContext(Context);
 
   const closeModal = () => {
@@ -27,10 +27,12 @@ const ModalCreate = observer(({show, setShow}) => {
   const formik = useFormik({
     enableReinitialize: true,
     initialValues: {
-      name: '',
+      name: quality.name,
       subjects: store.subjects.list.map(subject => ({
         id: subject.id, 
-        name: subject.name
+        name: subject.name,
+        active: quality.subjectsList.find(qualitySubject => qualitySubject.id === subject.id) && true,
+        hours: quality.subjectsList.find(qualitySubject => qualitySubject.id === subject.id)?.hours ?? 0,
       }))
     },
     onSubmit: values => {
@@ -48,12 +50,12 @@ const ModalCreate = observer(({show, setShow}) => {
   })
 
   const isSubjectsHasActive = formik.values.subjects.reduce((acc, subject) => acc + 0 || subject.active, 0) > 0
- 
+  
   return (
     <Modal 
       active={show} 
-      setActive={(closeModal)} 
-      header={'Добавить личностное качество'}
+      setActive={closeModal} 
+      header={'Изменить личностное качество'}
     > 
       <form onSubmit={formik.handleSubmit}>
         <TextField
@@ -77,8 +79,8 @@ const ModalCreate = observer(({show, setShow}) => {
                 type="checkbox" 
                 id={`subjects[${subject.id - 1}].active`}
                 name={`subjects[${subject.id - 1}].active`}
-                value={formik.values.independentWorkHours}
                 onChange={formik.handleChange}
+                defaultChecked={formik.values.subjects[subject.id - 1]?.active ?? false}
               />
               <label 
                 htmlFor={`subjects[${subject.id - 1}].active`}

@@ -1,9 +1,108 @@
 .personal-qualities__row {
   position: relative;
-  grid-template-columns: 5% 47% 14% 14% 6% 14%;
+  grid-template-columns: 5% 61% 14% 6% 14%;
 }
 
 .personal-qualities__row .table__cell:nth-child(2) {
   padding-left: 60px;
   justify-content: flex-start;
+}
+
+.qialities__subject-wrapper {
+  padding: 15px;
+  border: 1px solid #484C51;
+  border-radius: 3px;
+  width: min(475px, 50%);
+  max-height: 425px;
+  overflow: auto;
+
+  position: relative;
+  flex-direction: column;
+  display: flex;
+  gap: 15px;
+  margin-bottom: 30px;
+}
+
+
+.qualities__subject-item input { display: none; }
+
+.qualities__subject-item label { 
+  display: flex; 
+  gap: 15px;
+}
+
+.qualities__subject-item input + label::before {
+  content: '';
+  display: block;
+  width: 20px;
+  height: 20px;
+  box-sizing: border-box;
+  border: 1px solid #2183AA;
+  border-radius: 1px;
+  background-color: #fff;
+  cursor: pointer;
+  transition: background-color .2s ease-in-out;
+}
+
+.qualities__subject-item input:checked + label::before {
+  background-color: #2183AA;
+  background-image: url('../assets/icons/complete.svg');
+  background-repeat: no-repeat;
+  background-size: 12px;
+  background-position: center;
+}
+
+.qialities__subject-wrapper::-webkit-scrollbar {
+  width: 12px;
+}
+
+.qialities__subject-wrapper::-webkit-scrollbar-track {
+  border-radius: 100px;
+}
+
+.qialities__subject-wrapper::-webkit-scrollbar-thumb {
+  border-radius: 100px;
+  background-clip: content-box;
+  background-color: #2183AA;
+}
+
+.personal-quality__title {
+  font-weight: bold;
+  font-size: 16px;
+  line-height: 20px;
+  display: block;
+  margin-bottom: -10px;
+}
+
+.personal-quality__table {
+  margin-bottom: 35px;
+}
+
+.personal-quality__row {
+  grid-template-columns: 75% 25%;
+  min-height: 62px;
+  background-color: transparent !important;
+  border-bottom: 1px solid #2183AA;
+}
+
+.personal-quality__row .table__cell:first-child {
+  padding-left: 0;
+}
+
+
+.personal-quality__row .input__wrapper { 
+  margin-bottom: 0;
+}
+
+.personal-quality__row .table__cell div {
+  padding: 0;
+}
+
+.personal-quality__row input[type="text"] { 
+  width: 158px;
+  height: 32px;
+  text-align: center;
+  font-weight: bold;
+  padding-right: 10px;
+  font-size: 18px;
 }

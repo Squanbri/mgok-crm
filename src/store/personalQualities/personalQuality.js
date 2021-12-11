@@ -1,4 +1,4 @@
-import {makeAutoObservable, observable} from "mobx";
+import {makeAutoObservable, observable, values} from "mobx";
 import Subject from "./subject";
 
 class PersonalQuality {
@@ -33,6 +33,10 @@ class PersonalQuality {
       subjects?.forEach((subject) => {
         this.setSubject(subject);
       });
+    }
+
+    get subjectsList() {
+      return values(this.subjects)
     }
 }
 
